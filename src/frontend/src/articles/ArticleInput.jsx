@@ -2,10 +2,9 @@ import {Button, Form, InputGroup} from "react-bootstrap";
 import {useState} from "react";
 
 export const ArticleInput = ({onArticleAdded}) => {
-    const [articleUrl, setArticleUrl] = useState("")
+    const [articleUrl, setArticleUrl] = useState("");
 
     const handleSubmit = async () => {
-
         try {
             const newArticle = {url: articleUrl};
 
@@ -17,7 +16,7 @@ export const ArticleInput = ({onArticleAdded}) => {
 
             onArticleAdded();
 
-            setArticleUrl("")
+            setArticleUrl("");
         } catch (error) {
             console.log(error);
         }

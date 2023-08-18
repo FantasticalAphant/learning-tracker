@@ -3,8 +3,8 @@ import {Button, InputGroup, Form} from "react-bootstrap";
 import {BookList} from "./BookList.jsx";
 
 export const BooksPage = () => {
-    const [query, setQuery] = useState('')
-    const [results, setResults] = useState([])
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
 
     const handleSubmit = async () => {
         try {

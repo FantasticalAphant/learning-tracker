@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 
 export const TopicsPage = () => {
-    const [topics, setTopics] = useState([])
+    const [topics, setTopics] = useState([]);
 
     useEffect(() => {
         const fetchTopics = async () => {
