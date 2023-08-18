@@ -4,6 +4,7 @@ import {TopicsPage} from "./pages/TopicsPage";
 import {NavigationBar} from "./components/NavigationBar.jsx";
 import {ArticlesPage} from "./articles/ArticlesPage.jsx";
 import {BooksPage} from "./books/BooksPage.jsx";
+import {VideosPage} from "./videos/VideosPage.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/articles" element={<ArticlesPage />} />
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/topics" element={<TopicsPage />} />
+                <Route path="/videos" element={<VideosPage />} />
             </Routes>
         </Router>
     </>
