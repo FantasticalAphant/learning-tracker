@@ -34,4 +34,8 @@ public class VideoService {
 
         return videoResponse;
     }
+
+    public List<Video> getVideos() {
+        return videoRepository.findAll();
+    }
 }
