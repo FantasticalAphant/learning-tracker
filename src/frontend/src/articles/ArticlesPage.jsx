@@ -20,7 +20,7 @@ export const ArticlesPage = () => {
         fetchArticles().then(r => console.log(r));
     }, [])
 
-    const handleArticleAdded = () => {
+    const handleArticlesChanged = () => {
         fetchArticles();
     }
 
@@ -28,9 +28,9 @@ export const ArticlesPage = () => {
         <>
             <h1>Articles</h1>
 
-            <ArticleInput onArticleAdded={handleArticleAdded}/>
+            <ArticleInput onArticleAdded={handleArticlesChanged}/>
 
-            <ArticleList articles={articles}/>
+            <ArticleList articles={articles} onArticleDeleted={handleArticlesChanged}/>
         </>
     )
 }

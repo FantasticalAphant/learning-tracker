@@ -24,4 +24,9 @@ public class ArticleController {
     public Article addArticle(@RequestBody Article article) {
         return articleService.addArticle(article);
     }
+
+    @DeleteMapping("/article")
+    public void deleteArticle(@RequestParam String url) {
+        articleService.deleteArticle(url);
+    }
 }
