@@ -81,10 +81,12 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                     <ListGroup.Item key={article.url}>
                         <a href={article.url}>{article.title}</a>
                         <br/>
-                        {/*TODO: add tags/topics*/}
-                        <Badge pill bg="primary">
-                            Primary
-                        </Badge>
+                        {/*TODO: change table schema to use tag names instead of id*/}
+                        {article.topics.map((topic) => (
+                            <Badge key={topic} pill bg="primary">
+                                {topic}
+                            </Badge>
+                        ))}
                         <Dropdown className="float-end">
                             <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
                                 Actions
