@@ -6,7 +6,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ArticleService {
@@ -37,5 +40,20 @@ public class ArticleService {
 
     public void deleteArticle(String url) {
         articleRepository.deleteById(url);
+    }
+
+    public List<Article> getArticlesByTopic(UUID topicId) {
+        return articleRepository.findAllByTopic(topicId);
+    }
+
+    public void addTopicsToArticle(String url, List<UUID> topicIds) {
+        articleRepository.findById(url).ifPresent(article -> {
+            article.setTopics(topicIds);
+            articleRepository.save(article);
+        });
+    }
+
+    public List<UUID> getTopicsForArticle(String url) {
+        return articleRepository.findById(url).map(Article::getTopics).orElse(new ArrayList<>());
     }
 }

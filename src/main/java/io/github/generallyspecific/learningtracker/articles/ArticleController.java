@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -28,5 +29,20 @@ public class ArticleController {
     @DeleteMapping("/article")
     public void deleteArticle(@RequestParam String url) {
         articleService.deleteArticle(url);
+    }
+
+    @GetMapping("/article/topics")
+    public List<UUID> getTopicsForArticle(@RequestParam String url) {
+        return articleService.getTopicsForArticle(url);
+    }
+
+    @PutMapping("/article/topics")
+    public void addTopicsToArticle(@RequestParam String url, @RequestBody List<UUID> topicIds) {
+        articleService.addTopicsToArticle(url, topicIds);
+    }
+
+    @GetMapping("/articles/topic/{topicId}")
+    public List<Article> getArticlesByTopic(@PathVariable UUID topicId) {
+        return articleService.getArticlesByTopic(topicId);
     }
 }

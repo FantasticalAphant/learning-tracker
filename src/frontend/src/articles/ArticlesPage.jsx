@@ -30,7 +30,7 @@ export const ArticlesPage = () => {
 
             <ArticleInput onArticleAdded={handleArticlesChanged}/>
 
-            <ArticleList articles={articles} onArticleDeleted={handleArticlesChanged}/>
+            <ArticleList articles={articles} onArticleUpdated={handleArticlesChanged}/>
         </>
     )
 }
