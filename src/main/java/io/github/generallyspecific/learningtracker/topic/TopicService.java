@@ -23,4 +23,8 @@ public class TopicService {
         topic.setId(UUID.randomUUID());
         return topicRepository.save(topic);
     }
+
+    public Topic getTopic(String id) {
+        return topicRepository.findById(UUID.fromString(id)).orElse(null);
+    }
 }

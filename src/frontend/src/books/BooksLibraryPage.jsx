@@ -1,5 +1,5 @@
 
-export const TopicCard = () => {
+export const BooksLibraryPage = () => {
     return (
         <>
         </>

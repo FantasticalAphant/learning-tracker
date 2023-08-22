@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {TopicCard} from "./TopicCard.jsx";
 
 export const TopicsPage = () => {
     const [topics, setTopics] = useState([]);
@@ -22,7 +23,7 @@ export const TopicsPage = () => {
             <h1>Topics</h1>
             <ul>
                 {topics.map(topic => (
-                    <li key={topic.id}>{topic.name}</li>
+                    <TopicCard key={topic["id"]} topic={topic}/>
                 ))}
             </ul>
         </>
