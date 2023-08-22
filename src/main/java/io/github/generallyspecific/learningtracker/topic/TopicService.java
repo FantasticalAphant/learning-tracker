@@ -27,4 +27,8 @@ public class TopicService {
     public Topic getTopic(String id) {
         return topicRepository.findById(UUID.fromString(id)).orElse(null);
     }
+
+    public void deleteTopic(String id) {
+        topicRepository.deleteById(UUID.fromString(id));
+    }
 }

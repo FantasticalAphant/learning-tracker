@@ -29,4 +29,9 @@ public class TopicController {
     public Topic getTopic(@PathVariable String id) {
         return topicService.getTopic(id);
     }
+
+    @DeleteMapping("/topics/{id}")
+    public void deleteTopic(@PathVariable String id) {
+        topicService.deleteTopic(id);
+    }
 }

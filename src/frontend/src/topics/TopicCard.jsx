@@ -1,6 +1,20 @@
 import {Card} from "react-bootstrap";
 
-export const TopicCard = ({topic}) => {
+export const TopicCard = ({topic, onTopicsAdded}) => {
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/topics/${topic["id"]}`, {
+                method: "DELETE",
+            });
+
+            onTopicsAdded();
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Card style={{ width: '18rem' }}>
@@ -10,7 +24,10 @@ export const TopicCard = ({topic}) => {
                     <Card.Text>
                         {topic["description"]}
                     </Card.Text>
-                    <Card.Link href={`/topics/${topic["id"]}`}>View</Card.Link>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <Card.Link href={`/topics/${topic["id"]}`}>View</Card.Link>
+                        <Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
+                    </div>
                 </Card.Body>
             </Card>
         </>

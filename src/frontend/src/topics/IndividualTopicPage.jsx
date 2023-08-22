@@ -9,13 +9,13 @@ export const IndividualTopicPage = () => {
     useEffect(() => {
         const fetchTopic = async () => {
             try {
-                const [responseTopic, responseArticles] = await Promise.all([
+                const [topicResponse, articlesResponse] = await Promise.all([
                     fetch(`http://localhost:8080/topics/${id}`),
                     fetch(`http://localhost:8080/articles/topic/${id}`)
                 ]);
 
-                const topic = await responseTopic.json();
-                const articles = await responseArticles.json();
+                const topic = await topicResponse.json();
+                const articles = await articlesResponse.json();
 
                 setTopic(topic);
                 setArticles(articles);
@@ -31,12 +31,18 @@ export const IndividualTopicPage = () => {
         <>
             <h1>{topic["name"]}</h1>
             <p>{topic["description"]}</p>
+
+            <h1>Articles</h1>
             {articles.map(article => (
                 <div key={article["id"]}>
                     <h2>{article["title"]}</h2>
                     <p>{article["content"]}</p>
                 </div>
             ))}
+
+            <h1>Books</h1>
+
+            <h1>Videos</h1>
         </>
     )
 
