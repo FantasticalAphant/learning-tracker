@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Button, InputGroup, Form} from "react-bootstrap";
 import {BookList} from "./BookList.jsx";
+import {Link} from "react-router-dom";
 
 export const BooksPage = () => {
     const [query, setQuery] = useState('');
@@ -8,7 +9,7 @@ export const BooksPage = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/books?query=${query}&maxResults=20`, {
+            const response = await fetch(`http://localhost:8080/books/search?query=${query}&maxResults=20`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
             });
@@ -27,7 +28,14 @@ export const BooksPage = () => {
 
     return (
         <>
-            <h1>Books</h1>
+            <div>
+                <h1>Books</h1>
+                <Link to={"/books/library"}>
+                    <Button type="submit" variant="primary">
+                        Library
+                    </Button>
+                </Link>
+            </div>
             <InputGroup className="mb-3">
                 <Form.Control
                     placeholder="Book Title"
@@ -42,14 +50,13 @@ export const BooksPage = () => {
                     }}
                 />
                 <Button type="submit" variant="primary" onClick={handleSubmit}>
-                    Add
+                    Search
                 </Button>
             </InputGroup>
 
             <div>
                 <BookList books={results}/>
             </div>
-
         </>
     )
 }
