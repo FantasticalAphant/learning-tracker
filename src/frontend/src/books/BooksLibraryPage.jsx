@@ -20,7 +20,7 @@ export const BooksLibraryPage = () => {
         }
 
         fetchBooks();
-    })
+    }, [])
 
     return (
         <>
@@ -35,6 +35,7 @@ export const BooksLibraryPage = () => {
                     <img src={book.thumbnail} alt={book.title}/>
                 </div>
             ))}
+            <hr />
         </>
     )
 }
