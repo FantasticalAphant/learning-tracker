@@ -3,8 +3,11 @@ package io.github.generallyspecific.learningtracker.videos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VideoService {
@@ -29,7 +32,7 @@ public class VideoService {
         String channelTitle = item.getSnippet().getChannelTitle();
         Instant publishedAt = Instant.parse(item.getSnippet().getPublishedAt());
 
-        Video video = new Video(videoId, videoTitle, videoDescription, chanelId, channelTitle, publishedAt);
+        Video video = new Video(videoId, videoTitle, videoDescription, chanelId, channelTitle, publishedAt, new ArrayList<>());
         videoRepository.save(video);
 
         return videoResponse;
