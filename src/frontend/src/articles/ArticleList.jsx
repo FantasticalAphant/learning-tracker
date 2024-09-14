@@ -82,7 +82,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                         <a href={article.url}>{article.title}</a>
                         <br/>
                         {/*TODO: change table schema to use tag names instead of id*/}
-                        {article.topics.map((topic) => (
+                        {(article.topics || []).map((topic) => (
                             <Badge key={topic} pill bg="primary">
                                 {topic}
                             </Badge>
