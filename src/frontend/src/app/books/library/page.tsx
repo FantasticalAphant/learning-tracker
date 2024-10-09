@@ -1,6 +1,8 @@
+"use client"
+
 import {useEffect, useState} from "react";
 
-export const BooksLibraryPage = () => {
+export default function BooksLibraryPage() {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
@@ -27,15 +29,15 @@ export const BooksLibraryPage = () => {
             <h1>Books Library</h1>
             {books.map((book, index) => (
                 <div key={index}>
-                    <h2>{book.title}</h2>
-                    <p>{book.authors.join(', ')}</p>
-                    <p>{book.publishedDate}</p>
-                    <p>{book.publisher}</p>
-                    <p>{book.description}</p>
-                    <img src={book.thumbnail} alt={book.title}/>
+                    <h2>{book["books"]}</h2>
+                    <p>{book["authors"].join(', ')}</p>
+                    <p>{book["publishedDate"]}</p>
+                    <p>{book["publisher"]}</p>
+                    <p>{book["description"]}</p>
+                    <img src={book["thumbnail"]} alt={book["title"]}/>
                 </div>
             ))}
-            <hr />
+            <hr/>
         </>
     )
 }

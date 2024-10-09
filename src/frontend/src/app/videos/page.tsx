@@ -1,7 +1,9 @@
-import {Button, InputGroup, Form} from "react-bootstrap";
+"use client"
+
+import {Button, Form, InputGroup} from "react-bootstrap";
 import {useEffect, useState} from "react";
 
-export const VideosPage = () => {
+export default function VideosPage() {
     const [videoUrl, setVideoUrl] = useState("");
     const [videos, setVideos] = useState([]);
     const [savedVideos, setSavedVideos] = useState([]);
@@ -78,7 +80,7 @@ export const VideosPage = () => {
                     <a href={`https://www.youtube.com/channel/${video["channelId"]}`}>
                         <h2>Channel: {video["channelTitle"]}</h2>
                     </a>
-                    <br />
+                    <br/>
                 </div>
             )}
 

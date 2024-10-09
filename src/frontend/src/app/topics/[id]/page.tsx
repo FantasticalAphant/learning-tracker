@@ -1,8 +1,13 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+"use client"
 
-export const IndividualTopicPage = () => {
-    const {id} = useParams();
+import {useEffect, useState} from "react";
+
+interface Params {
+    params: { id: string; };
+}
+
+export default function IndividualTopicPage({params}: Params) {
+    const {id} = params;
     const [topic, setTopic] = useState([]);
     const [articles, setArticles] = useState([]);
 
@@ -33,6 +38,7 @@ export const IndividualTopicPage = () => {
             <p>{topic["description"]}</p>
 
             <h1>Articles</h1>
+            {/*FIXME - articles.map is not a function*/}
             {articles.map(article => (
                 <div key={article["id"]}>
                     <h2>{article["title"]}</h2>
@@ -45,5 +51,4 @@ export const IndividualTopicPage = () => {
             <h1>Videos</h1>
         </>
     )
-
 }

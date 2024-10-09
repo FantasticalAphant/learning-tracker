@@ -1,8 +1,10 @@
-import {useState, useEffect} from 'react'
-import {TopicCard} from "./TopicCard.jsx";
-import {TopicInput} from "./TopicInput.jsx";
+"use client"
 
-export const TopicsPage = () => {
+import {useEffect, useState} from 'react'
+import {TopicCard} from "@/components/TopicCard.jsx";
+import {TopicInput} from "@/components/TopicInput";
+
+export default function TopicsPage() {
     const [topics, setTopics] = useState([]);
 
     const fetchTopics = async () => {

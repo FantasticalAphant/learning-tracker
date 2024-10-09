@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
-import {ArticleInput} from "./ArticleInput.jsx";
-import {ArticleList} from "./ArticleList.jsx";
+"use client"
 
-export const ArticlesPage = () => {
+import {useEffect, useState} from 'react';
+import {ArticleInput} from "@/components/ArticleInput.jsx";
+import {ArticleList} from "@/components/ArticleList.jsx";
+
+export default function ArticlesPage() {
     // TODO: check out react-query
     const [articles, setArticles] = useState([]);
 

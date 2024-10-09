@@ -1,9 +1,11 @@
-import {useState} from "react";
-import {Button, InputGroup, Form} from "react-bootstrap";
-import {BookList} from "./BookList.jsx";
-import {Link} from "react-router-dom";
+"use client"
 
-export const BooksPage = () => {
+import {useState} from "react";
+import {Button, Form, InputGroup} from "react-bootstrap";
+import {BookList} from "@/components/BookList";
+import Link from "next/link";
+
+export default function BooksPage() {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
 
@@ -30,7 +32,7 @@ export const BooksPage = () => {
         <>
             <div>
                 <h1>Books</h1>
-                <Link to={"/books/library"}>
+                <Link href="/books/library">
                     <Button type="submit" variant="primary">
                         Library
                     </Button>
