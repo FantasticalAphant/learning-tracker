@@ -26,7 +26,7 @@ export default function BooksLibraryPage() {
     }, [])
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Books"}>
             <h1>Books Library</h1>
             {books.map((book, index) => (
                 <div key={index}>

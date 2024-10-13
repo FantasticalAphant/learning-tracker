@@ -28,7 +28,7 @@ export default function ArticlesPage() {
     }
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Articles"}>
             <h1>Articles</h1>
 
             <ArticleInput onArticleAdded={handleArticlesChanged}/>

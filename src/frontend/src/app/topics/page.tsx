@@ -27,7 +27,7 @@ export default function TopicsPage() {
     }
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Topics"}>
             <h1>Topics</h1>
             <TopicInput onTopicsAdded={handleTopicsChanged}/>
             <ul>

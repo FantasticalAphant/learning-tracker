@@ -34,7 +34,7 @@ export default function IndividualTopicPage({params}: Params) {
     }, [])
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Topics"}>
             <h1>{topic["name"]}</h1>
             <p>{topic["description"]}</p>
 

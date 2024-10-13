@@ -45,7 +45,7 @@ export default function VideosPage() {
     }
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Videos"}>
             <h1>Videos</h1>
             <InputGroup className="mb-3">
                 <Form.Control

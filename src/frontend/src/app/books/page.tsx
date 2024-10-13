@@ -30,7 +30,7 @@ export default function BooksPage() {
     // TODO: allow enter to submit form
 
     return (
-        <Shell>
+        <Shell highlightedTab={"Books"}>
             <div>
                 <h1>Books</h1>
                 <Link href="/books/library">
