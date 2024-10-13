@@ -3,6 +3,7 @@
 import {useEffect, useState} from 'react';
 import {ArticleInput} from "@/components/ArticleInput.jsx";
 import {ArticleList} from "@/components/ArticleList.jsx";
+import Shell from "@/components/Shell";
 
 export default function ArticlesPage() {
     // TODO: check out react-query
@@ -27,12 +28,12 @@ export default function ArticlesPage() {
     }
 
     return (
-        <>
+        <Shell>
             <h1>Articles</h1>
 
             <ArticleInput onArticleAdded={handleArticlesChanged}/>
 
             <ArticleList articles={articles} onArticleUpdated={handleArticlesChanged}/>
-        </>
+        </Shell>
     )
 }

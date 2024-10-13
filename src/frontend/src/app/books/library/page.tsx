@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
+import Shell from "@/components/Shell";
 
 export default function BooksLibraryPage() {
     const [books, setBooks] = useState([]);
@@ -25,7 +26,7 @@ export default function BooksLibraryPage() {
     }, [])
 
     return (
-        <>
+        <Shell>
             <h1>Books Library</h1>
             {books.map((book, index) => (
                 <div key={index}>
@@ -38,6 +39,6 @@ export default function BooksLibraryPage() {
                 </div>
             ))}
             <hr/>
-        </>
+        </Shell>
     )
 }

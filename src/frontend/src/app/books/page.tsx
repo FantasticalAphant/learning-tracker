@@ -4,6 +4,7 @@ import {useState} from "react";
 import {Button, Form, InputGroup} from "react-bootstrap";
 import {BookList} from "@/components/BookList";
 import Link from "next/link";
+import Shell from "@/components/Shell";
 
 export default function BooksPage() {
     const [query, setQuery] = useState('');
@@ -29,7 +30,7 @@ export default function BooksPage() {
     // TODO: allow enter to submit form
 
     return (
-        <>
+        <Shell>
             <div>
                 <h1>Books</h1>
                 <Link href="/books/library">
@@ -59,6 +60,6 @@ export default function BooksPage() {
             <div>
                 <BookList books={results}/>
             </div>
-        </>
+        </Shell>
     )
 }

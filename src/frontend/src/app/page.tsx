@@ -1,10 +1,11 @@
-import {NavigationBar} from "@/components/NavigationBar";
+import Shell from "@/components/Shell";
 
 export default function Home() {
     return (
         <div>
-            <NavigationBar/>
-            <h1>Test</h1>
+            <Shell>
+                <h1>Content here</h1>
+            </Shell>
         </div>
     );
 }

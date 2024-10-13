@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
+import Shell from "@/components/Shell";
 
 interface Params {
     params: { id: string; };
@@ -33,7 +34,7 @@ export default function IndividualTopicPage({params}: Params) {
     }, [])
 
     return (
-        <>
+        <Shell>
             <h1>{topic["name"]}</h1>
             <p>{topic["description"]}</p>
 
@@ -49,6 +50,6 @@ export default function IndividualTopicPage({params}: Params) {
             <h1>Books</h1>
 
             <h1>Videos</h1>
-        </>
+        </Shell>
     )
 }

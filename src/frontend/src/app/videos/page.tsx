@@ -2,6 +2,7 @@
 
 import {Button, Form, InputGroup} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import Shell from "@/components/Shell";
 
 export default function VideosPage() {
     const [videoUrl, setVideoUrl] = useState("");
@@ -44,7 +45,7 @@ export default function VideosPage() {
     }
 
     return (
-        <>
+        <Shell>
             <h1>Videos</h1>
             <InputGroup className="mb-3">
                 <Form.Control
@@ -84,6 +85,6 @@ export default function VideosPage() {
                 </div>
             )}
 
-        </>
+        </Shell>
     )
 }

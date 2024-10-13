@@ -3,6 +3,7 @@
 import {useEffect, useState} from 'react'
 import {TopicCard} from "@/components/TopicCard.jsx";
 import {TopicInput} from "@/components/TopicInput";
+import Shell from "@/components/Shell";
 
 export default function TopicsPage() {
     const [topics, setTopics] = useState([]);
@@ -26,7 +27,7 @@ export default function TopicsPage() {
     }
 
     return (
-        <>
+        <Shell>
             <h1>Topics</h1>
             <TopicInput onTopicsAdded={handleTopicsChanged}/>
             <ul>
@@ -34,6 +35,6 @@ export default function TopicsPage() {
                     <TopicCard key={topic["id"]} topic={topic} onTopicsAdded={handleTopicsChanged}/>
                 ))}
             </ul>
-        </>
+        </Shell>
     )
 }
