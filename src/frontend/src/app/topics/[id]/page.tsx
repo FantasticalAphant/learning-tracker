@@ -39,8 +39,7 @@ export default function IndividualTopicPage({params}: Params) {
             <p>{topic["description"]}</p>
 
             <h1>Articles</h1>
-            {/*FIXME - articles.map is not a function*/}
-            {articles.map(article => (
+            {articles && articles.map(article => (
                 <div key={article["id"]}>
                     <h2>{article["title"]}</h2>
                     <p>{article["content"]}</p>
