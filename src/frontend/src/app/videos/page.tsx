@@ -24,7 +24,7 @@ export default function VideosPage() {
             }
         }
         fetchSavedVideos();
-    }, [])
+    }, [videos])
 
     const handleSubmit = async () => {
         const videoId = videoUrl.split("v=")[1].split("&")[0];
@@ -75,15 +75,7 @@ export default function VideosPage() {
                 </div>
             </div>
 
-            {videos.map((video, index) =>
-                <div key={index}>
-                    <h2>{video["snippet"]["title"]}</h2>
-                    <h2>{video["snippet"]["channelTitle"]}</h2>
-                </div>
-            )}
-
             <VideoTable videos={savedVideos}/>
-
         </Shell>
     )
 }
