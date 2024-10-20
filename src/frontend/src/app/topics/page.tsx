@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from 'react'
-import {TopicCard} from "@/components/TopicCard.jsx";
+import {TopicCards} from "@/components/TopicCards.jsx";
 import {TopicInput} from "@/components/TopicInput";
 import Shell from "@/components/Shell";
 
@@ -30,11 +30,10 @@ export default function TopicsPage() {
         <Shell highlightedTab={"Topics"}>
             <h1>Topics</h1>
             <TopicInput onTopicsAdded={handleTopicsChanged}/>
-            <ul>
-                {topics.map(topic => (
-                    <TopicCard key={topic["id"]} topic={topic} onTopicsAdded={handleTopicsChanged}/>
-                ))}
-            </ul>
+
+            <div className="mt-5">
+                <TopicCards topics={topics} onTopicsAdded={handleTopicsChanged}/>
+            </div>
         </Shell>
     )
 }
