@@ -1,5 +1,9 @@
 import {Badge, Dropdown, Form, ListGroup, Modal} from "react-bootstrap";
 import {useState} from "react";
+import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
+import {ChevronDownIcon} from "@heroicons/react/20/solid";
+import ArticleDeleteModal from "@/components/ArticleDeleteModal";
+import ArticleUpdateTagsModal from "@/components/ArticleUpdateTagsModal";
 
 export const ArticleList = ({articles, onArticleUpdated}) => {
     const [topics, setTopics] = useState([]);
@@ -8,9 +12,6 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     const [showModal1, setShowModal1] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
-
-    const handleClose1 = () => setShowModal1(false);
-    const handleClose2 = () => setShowModal2(false);
 
     const handleShow1 = (url) => {
         setCurrentArticle(url);
@@ -76,74 +77,98 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     return (
         <>
-            <ListGroup>
-                {articles.map(article => (
-                    <ListGroup.Item key={article.url}>
-                        <a href={article.url}>{article.title}</a>
-                        <br/>
-                        {/*TODO: change table schema to use tag names instead of id*/}
-                        {(article.topics || []).map((topic) => (
-                            <Badge key={topic} pill bg="primary">
-                                {topic}
-                            </Badge>
-                        ))}
-                        <Dropdown className="float-end">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-                                Actions
-                            </Dropdown.Toggle>
+            <div>
+                <div className="mt-8 flow-root">
+                    <h1 className="text-base font-semibold leading-6 text-gray-900">Saved Articles</h1>
+                    <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <table className="min-w-full divide-y divide-gray-300">
+                                <thead>
+                                <tr>
+                                    <th scope="col"
+                                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                        Title
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Header #2
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Header #3
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Header #4
+                                    </th>
+                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                        <span className="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                {/*FIXME: weird bug that makes Vue.js page unable to update tags or delete*/}
+                                {/*FIXME: doesn't seem to be happening for other articles regardless of position*/}
+                                {/*FIXME: also get a maximum update depth exceeded error sometimes*/}
+                                {articles.map((article) => (
+                                    <tr key={article["url"]}>
+                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                            <a href={article["url"]}>
+                                                {article["title"]}
+                                            </a>
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            Test
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
+                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                                                <Menu as="div" className="relative inline-block text-left">
+                                                    <div>
+                                                        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                            Actions
+                                                            <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
+                                                        </MenuButton>
+                                                    </div>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => {handleShow2(article.url); fetchTopics(article.url)}}>Update Tags</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleShow1(article.url)}>Delete</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
-
-            {/*NOTE: move out of ListGroup to prevent black backdrop*/}
-            <Modal show={showModal1} onHide={handleClose1} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Article</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure you want to delete this article?</Modal.Body>
-                <Modal.Footer>
-                    <button className="btn btn-secondary" onClick={handleClose1}>
-                        Cancel
-                    </button>
-                    <button className="btn btn-danger" onClick={() => {handleClose1(); deleteArticle(currentArticle)}}>
-                        Delete
-                    </button>
-                </Modal.Footer>
-            </Modal>
-
-            <Modal show={showModal2} onHide={handleClose2} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Update Tags</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {topics.map(topic => (
-                        <div key={topic.id}>
-                            <Form>
-                                <Form.Check
-                                    type="checkbox"
-                                    checked={selectedTopics.includes(topic.id)}
-                                    label={topic.name}
-                                    onChange={(e) => handleCheckboxChange(e.target.checked, topic.id)}
-                                />
-                            </Form>
+                                                    <MenuItems
+                                                        transition
+                                                        className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                                    >
+                                                        <div className="py-1">
+                                                            <MenuItem>
+                                                                <a
+                                                                    href="#"
+                                                                    onClick={() => {handleShow2(article["url"]); fetchTopics(article["url"])}}
+                                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                                                                >
+                                                                    Edit Tags
+                                                                </a>
+                                                            </MenuItem>
+                                                            <MenuItem>
+                                                                <a
+                                                                    href="#"
+                                                                    onClick={() => handleShow1(article["url"])}
+                                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                                                                >
+                                                                    Delete
+                                                                </a>
+                                                            </MenuItem>
+                                                        </div>
+                                                    </MenuItems>
+                                                </Menu>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
                         </div>
-                    ))}
-                </Modal.Body>
-                <Modal.Footer>
-                    <button className="btn btn-secondary" onClick={handleClose2}>
-                        Cancel
-                    </button>
-                    <button className="btn btn-primary" onClick={() => {handleClose2(); updateTopics()}}>
-                        Update
-                    </button>
-                </Modal.Footer>
-            </Modal>
+                    </div>
+                </div>
+            </div>
+
+            <ArticleDeleteModal open={showModal1} setOpen={setShowModal1} deleteArticle={deleteArticle} currentArticle={currentArticle}/>
+            <ArticleUpdateTagsModal open={showModal2} setOpen={setShowModal2} topics={topics} selectedTopics={selectedTopics} handleCheckboxChange={handleCheckboxChange} updateTopics={updateTopics}/>
         </>
     )
 }
+
