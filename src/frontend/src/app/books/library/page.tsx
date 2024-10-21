@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import BookLibrary from "@/components/BookLibrary";
+import Link from "next/link";
 
 export default function BooksLibraryPage() {
     const [books, setBooks] = useState([]);
@@ -28,7 +29,10 @@ export default function BooksLibraryPage() {
 
     return (
         <Shell highlightedTab={"Books"}>
-            <h1>Books Library</h1>
+            <div className="flex justify-between mb-5">
+                <h1>Library</h1>
+                <Link href={"/books"}>Search books</Link>
+            </div>
             <BookLibrary books={books}/>
         </Shell>
     )
