@@ -3,7 +3,6 @@ package io.github.generallyspecific.learningtracker.videos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +39,9 @@ public class VideoService {
 
     public List<Video> getVideos() {
         return videoRepository.findAll();
+    }
+
+    public List<Video> getVideosByTopic(UUID topicId) {
+        return videoRepository.findAllByTopic(topicId);
     }
 }
