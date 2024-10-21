@@ -1,7 +1,6 @@
 "use client"
 
 import {useState} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
 import {BookList} from "@/components/BookList";
 import Link from "next/link";
 import Shell from "@/components/Shell";
@@ -27,37 +26,44 @@ export default function BooksPage() {
         }
     }
 
-    // TODO: allow enter to submit form
-
     return (
         <Shell highlightedTab={"Books"}>
             <div>
                 <h1>Books</h1>
                 <Link href="/books/library">
-                    <Button type="submit" variant="primary">
-                        Library
-                    </Button>
+                    Library
                 </Link>
             </div>
-            <InputGroup className="mb-3">
-                <Form.Control
-                    placeholder="Book Title"
-                    aria-label="Book Title"
-                    value={query}
-                    onChange={event => setQuery(event.target.value)}
-                    onKeyDown={event => {
-                        // TODO: allow enter to submit form
-                        if (event.key === "Enter") {
-                            handleSubmit();
-                        }
-                    }}
-                />
-                <Button type="submit" variant="primary" onClick={handleSubmit}>
-                    Search
-                </Button>
-            </InputGroup>
 
-            <div>
+            <div className="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                <label htmlFor="book-search" className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
+                    Book Search
+                </label>
+                <div className="mt-2 sm:col-span-2 sm:mt-0">
+                    <input
+                        id="book-search"
+                        name="book-search"
+                        type="text"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={event => {
+                            if (event.key === "Enter") {
+                                handleSubmit();
+                            }
+                        }}
+                        className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    />
+                </div>
+            </div>
+            <button
+                type="submit"
+                onClick={handleSubmit}
+                className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+                Submit
+            </button>
+
+            <div className="mt-5">
                 <BookList books={results}/>
             </div>
         </Shell>
