@@ -33,9 +33,9 @@ export const TopicInput = ({onTopicsAdded}) => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                <div className="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                     <label htmlFor="topic" className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
-                        Topic Name
+                        Topic Name:
                     </label>
                     <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <input
@@ -44,25 +44,23 @@ export const TopicInput = ({onTopicsAdded}) => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                         />
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label htmlFor="description"
-                               className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
-                            Description
-                        </label>
-                        <div className="mt-2 sm:col-span-2 sm:mt-0">
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows={3}
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                className="block w-full max-w-2xl rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                defaultValue={''}
-                            />
-                        </div>
+                    <label htmlFor="description"
+                           className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
+                        Description:
+                    </label>
+                    <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows={3}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="block w-full max-w-2xl rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            defaultValue={''}
+                        />
                     </div>
                 </div>
                 <button
