@@ -1,4 +1,3 @@
-import {Card} from "react-bootstrap";
 import Link from "next/link";
 
 export const TopicCards = ({topics, onTopicsAdded}) => {
