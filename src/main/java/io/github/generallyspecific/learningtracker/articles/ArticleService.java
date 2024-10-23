@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,9 +28,12 @@ public class ArticleService {
         try {
             Document document = org.jsoup.Jsoup.connect(url).get();
             String title = document.title();
+            System.out.println("Title: " + title);
             article.setTitle(title);
         } catch (Exception e) {
+            // JSoup call may fail due to Captcha checks
             System.out.println("Error connecting to " + url);
+            article.setTitle(url);
         }
         article.setCreated(Instant.now());
 
