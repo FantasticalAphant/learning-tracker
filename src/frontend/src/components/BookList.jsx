@@ -60,7 +60,7 @@ export const BookList = ({books}) => {
                                 </span>
                                 </dd>
                             </dl>
-                            {description.slice(0, 50)}...
+                            {description && description.slice(0, 50)}...
                         </div>
                         <button onClick={() => addBook(book)}>
                             Add to Library
