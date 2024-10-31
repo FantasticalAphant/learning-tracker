@@ -88,13 +88,16 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                                         Title
                                     </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col"
+                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Header #2
                                     </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col"
+                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Header #3
                                     </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col"
+                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Header #4
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
@@ -109,22 +112,20 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 {articles.map((article) => (
                                     <tr key={article["url"]}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            <a href={article["url"]}>
-                                                {article["title"]}
-                                            </a>
+                                            <a href={article["url"]}>{article["title"]}</a>
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            Test
-                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <a href="#" className="text-indigo-600 hover:text-indigo-900">
                                                 <Menu as="div" className="relative inline-block text-left">
                                                     <div>
-                                                        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                        <MenuButton
+                                                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                                             Actions
-                                                            <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
+                                                            <ChevronDownIcon aria-hidden="true"
+                                                                             className="-mr-1 h-5 w-5 text-gray-400"/>
                                                         </MenuButton>
                                                     </div>
 
@@ -136,7 +137,10 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                                             <MenuItem>
                                                                 <a
                                                                     href="#"
-                                                                    onClick={() => {handleShow2(article["url"]); fetchTopics(article["url"])}}
+                                                                    onClick={() => {
+                                                                        handleShow2(article["url"]);
+                                                                        fetchTopics(article["url"])
+                                                                    }}
                                                                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
                                                                 >
                                                                     Edit Tags
@@ -165,8 +169,11 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                 </div>
             </div>
 
-            <ArticleDeleteModal open={showModal1} setOpen={setShowModal1} deleteArticle={deleteArticle} currentArticle={currentArticle}/>
-            <ArticleUpdateTagsModal open={showModal2} setOpen={setShowModal2} topics={topics} selectedTopics={selectedTopics} handleCheckboxChange={handleCheckboxChange} updateTopics={updateTopics}/>
+            <ArticleDeleteModal open={showModal1} setOpen={setShowModal1} deleteArticle={deleteArticle}
+                                currentArticle={currentArticle}/>
+            <ArticleUpdateTagsModal open={showModal2} setOpen={setShowModal2} topics={topics}
+                                    selectedTopics={selectedTopics} handleCheckboxChange={handleCheckboxChange}
+                                    updateTopics={updateTopics}/>
         </>
     )
 }

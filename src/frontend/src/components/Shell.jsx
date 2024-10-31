@@ -21,6 +21,7 @@ import {
     BellIcon,
     BookOpenIcon,
     CalendarIcon,
+    CheckCircleIcon,
     Cog6ToothIcon,
     DocumentDuplicateIcon,
     DocumentTextIcon,
@@ -38,6 +39,7 @@ const navigationTabs = [
     {name: 'Books', href: '/books/library', icon: BookOpenIcon, current: false},
     {name: 'Videos', href: '/videos', icon: TvIcon, current: false},
     {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
+    {name: 'Tasks', href: '/tasks', icon: CheckCircleIcon, current: false},
     {name: 'Export', href: '#', icon: DocumentDuplicateIcon, current: false},
 ]
 const teams = [
