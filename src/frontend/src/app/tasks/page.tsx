@@ -49,7 +49,7 @@ export default function TasksPage() {
                 <h1>Tasks</h1>
                 <div>
                     <label htmlFor="text" className="block text-sm font-medium leading-6 text-gray-900">
-                        Add task
+                        Add new task
                     </label>
                     <div className="mt-2 flex rounded-md shadow-sm">
                         <input
@@ -77,6 +77,7 @@ export default function TasksPage() {
 
                 {tasks.map(task => (
                     <div key={task["id"]}>
+                        <input type={"checkbox"} className={"mr-2"} checked={task["completed"]}/>
                         {task["content"]}
                     </div>
                 ))}
