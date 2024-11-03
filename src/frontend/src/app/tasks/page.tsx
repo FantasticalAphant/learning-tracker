@@ -46,7 +46,7 @@ export default function TasksPage() {
     return (
         <div>
             <Shell highlightedTab={"Tasks"}>
-                <h1>Tasks</h1>
+                <p className="text-4xl text-center">Tasks</p>
                 <div>
                     <label htmlFor="text" className="block text-sm font-medium leading-6 text-gray-900">
                         Add new task

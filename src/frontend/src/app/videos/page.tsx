@@ -46,6 +46,7 @@ export default function VideosPage() {
 
     return (
         <Shell highlightedTab={"Videos"}>
+            <p className="text-4xl text-center mb-3">Videos</p>
             <div>
                 <label htmlFor="text" className="block text-sm font-medium leading-6 text-gray-900">
                     Add video

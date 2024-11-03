@@ -29,7 +29,7 @@ export default function ArticlesPage() {
 
     return (
         <Shell highlightedTab={"Articles"}>
-            <h1>Articles</h1>
+            <p className="text-4xl text-center mb-5">Articles</p>
 
             <ArticleInput onArticleAdded={handleArticlesChanged}/>
 

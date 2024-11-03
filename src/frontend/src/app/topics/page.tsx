@@ -28,7 +28,7 @@ export default function TopicsPage() {
 
     return (
         <Shell highlightedTab={"Topics"}>
-            <h1>Topics</h1>
+            <p className="text-4xl text-center">Topics</p>
             <TopicInput onTopicsAdded={handleTopicsChanged}/>
 
             <div className="mt-5">

@@ -29,7 +29,7 @@ export default function BooksPage() {
     return (
         <Shell highlightedTab={"Books"}>
             <div>
-                <h1>Books</h1>
+                <p className="text-4xl mb-2 text-center">Books</p>
                 <Link href="/books/library">
                     Library
                 </Link>
