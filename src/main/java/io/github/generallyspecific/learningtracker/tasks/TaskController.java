@@ -16,7 +16,10 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public List<Task> getTasks() {
+    public List<Task> getTasks(@RequestParam(required = false, defaultValue = "0") int limit) {
+        if (limit > 0) {
+            return taskService.getTasksWithLimit(limit);
+        }
         return taskService.getTasks();
     }
 

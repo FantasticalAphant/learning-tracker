@@ -59,6 +59,18 @@ function classNames(...classes) {
 export default function Shell({children, highlightedTab}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [navigation, setNavigation] = useState(navigationTabs)
+    const [topics, setTopics] = useState(null);
+
+    useEffect(() => {
+        const getTasks = async () => {
+            // get the top three topics and set them in the sidebar
+            const response = await fetch("http://localhost:8080/topics?limit=3");
+            const data = await response.json();
+            console.log(data)
+            setTopics(data);
+        }
+        getTasks();
+    }, []);
 
     useEffect(() => {
         setNavigation((prevNav) =>
@@ -231,12 +243,12 @@ export default function Shell({children, highlightedTab}) {
                                     <div className="text-xs font-semibold leading-6 text-gray-400">Your recent topics
                                     </div>
                                     <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                        {teams.map((team) => (
-                                            <li key={team.name}>
-                                                <a
-                                                    href={team.href}
+                                        {topics && topics.map((topic) => (
+                                            <li key={topic.title}>
+                                                <Link
+                                                    href={`/topics/${topic.id}`}
                                                     className={classNames(
-                                                        team.current
+                                                        topic.current
                                                             ? 'bg-gray-50 text-indigo-600'
                                                             : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
                                                         'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
@@ -244,16 +256,16 @@ export default function Shell({children, highlightedTab}) {
                                                 >
                           <span
                               className={classNames(
-                                  team.current
+                                  topic.current
                                       ? 'border-indigo-600 text-indigo-600'
                                       : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
                                   'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
                               )}
                           >
-                            {team.initial}
+                            {topic.name["0"]}
                           </span>
-                                                    <span className="truncate">{team.name}</span>
-                                                </a>
+                                                    <span className="truncate">{topic.name}</span>
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>
