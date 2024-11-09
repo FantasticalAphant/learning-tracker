@@ -31,7 +31,7 @@ export default function TopicsPage() {
             <p className="text-4xl text-center">Topics</p>
             <TopicInput onTopicsAdded={handleTopicsChanged}/>
 
-            <div className="mt-5">
+            <div className="mt-10">
                 <TopicCards topics={topics} onTopicsAdded={handleTopicsChanged}/>
             </div>
         </Shell>
