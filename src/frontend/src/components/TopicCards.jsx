@@ -21,7 +21,7 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
             <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {topics.map((topic) => (
                     <li key={topic["id"]}
-                        className="col-span-1 divide-y divide-gray-200 rounded-md bg-white shadow hover:bg-gray-50">
+                        className="col-span-1 divide-y divide-gray-200 rounded-md bg-white ring-1 ring-gray-100 shadow hover:bg-gray-50">
                         <Link href={`/topics/${topic["id"]}`}>
                             <div className="flex w-full items-center justify-between space-x-6 p-4">
                                 <div className="flex-1 truncate">
@@ -36,7 +36,7 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                     <div className="flex w-0 flex-1">
                                         <Link
                                             href={`#`}
-                                            className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-2 text-sm font-semibold text-gray-900 bg-yellow-100 hover:bg-yellow-100 hover:shadow"
+                                            className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-2 text-sm text-gray-900 bg-blue-100 hover:bg-blue-300 hover:shadow"
                                         >
                                             Change to Something Else
                                         </Link>
@@ -44,7 +44,7 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                     <div className="-ml-px flex w-0 flex-1">
                                         <Link
                                             href="#" onClick={() => handleDelete(topic["id"])}
-                                            className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-2 text-sm font-semibold text-gray-900 bg-red-400 hover:bg-red-500 hover:shadow"
+                                            className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-2 text-sm text-gray-900 bg-red-400 hover:bg-red-500 hover:shadow"
                                         >
                                             Delete
                                         </Link>
