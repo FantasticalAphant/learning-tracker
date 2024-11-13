@@ -62,14 +62,14 @@ export default function Shell({children, highlightedTab}) {
     const [topics, setTopics] = useState(null);
 
     useEffect(() => {
-        const getTasks = async () => {
+        const getTopics = async () => {
             // get the top three topics and set them in the sidebar
             const response = await fetch("http://localhost:8080/topics?limit=3");
             const data = await response.json();
             console.log(data)
             setTopics(data);
         }
-        getTasks();
+        getTopics();
     }, []);
 
     useEffect(() => {
