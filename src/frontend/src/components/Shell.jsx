@@ -38,9 +38,9 @@ const navigationTabs = [
     {name: 'Articles', href: '/articles', icon: DocumentTextIcon, current: false},
     {name: 'Books', href: '/books/library', icon: BookOpenIcon, current: false},
     {name: 'Videos', href: '/videos', icon: TvIcon, current: false},
-    {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
     {name: 'Tasks', href: '/tasks', icon: CheckCircleIcon, current: false},
-    {name: 'Export', href: '#', icon: DocumentDuplicateIcon, current: false},
+    {name: 'Notes', href: '/notes', icon: DocumentDuplicateIcon, current: false},
+    {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
 ]
 const teams = [
     {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
