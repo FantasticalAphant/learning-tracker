@@ -18,6 +18,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+// @ts-ignore
 export default function IndividualTopicPage({params}: Params) {
     const {id} = params;
     const [topic, setTopic] = useState([]);
@@ -25,6 +26,7 @@ export default function IndividualTopicPage({params}: Params) {
     // const [books, setBooks] = useState([]);
     const [videos, setVideos] = useState([]);
     const [activeTab, setActiveTab] = useState(tabs[0]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
 
     // Fetch the topic separately
@@ -80,29 +82,10 @@ export default function IndividualTopicPage({params}: Params) {
 
     return (
         <Shell highlightedTab={"Topics"}>
-            <h1>{topic["name"]}</h1>
-            <p>{topic["description"]}</p>
-
-            <h1>Articles</h1>
-            {articles && articles.map(article => (
-                <div key={article["id"]}>
-                    <h2>{article["title"]}</h2>
-                    <p>{article["content"]}</p>
-                </div>
-            ))}
-
-            <h1>Books</h1>
-
-            <h1>Videos</h1>
-            {videos && videos.map(video => (
-                <div key={video["id"]}>
-                    <h2>{video["title"]}</h2>
-                    <p>{video["description"]}</p>
-                </div>
-            ))}
-
             <div className="pt-5 border-b border-gray-200 pb-5 sm:pb-0">
-                <h3 className="text-base font-semibold leading-6 text-gray-900">{topic["name"]}</h3>
+                <p className="text-4xl font-semibold leading-6 text-gray-900">{topic["name"]}</p>
+                <br/>
+                <p className="text-xl leading-6 text-gray-900">{topic["description"]}</p>
                 <div className="mt-3 sm:mt-4">
                     <div className="sm:hidden">
                         <label htmlFor="current-tab" className="sr-only">
