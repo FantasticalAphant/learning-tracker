@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import ArticleDeleteModal from "@/components/ArticleDeleteModal";
@@ -17,35 +17,46 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
         setShowModal1(true);
     }
 
-    const handleShow2 = (url) => {
-        setCurrentArticle(url);
-        setShowModal2(true);
-    }
-
-    const fetchTopics = async (url) => {
+    const fetchTopics = useCallback(async (url) => {
         try {
             const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
                 fetch("http://localhost:8080/topics"),
-                fetch(`http://localhost:8080/article/topics?url=${url}`)]
+                fetch(`http://localhost:8080/article/topics?url=${encodeURIComponent(url)}`)]
             )
 
             const topics = await allTopicsResponse.json();
-            const selectedTopics = await currentTopicsResponse.json();
+            const selectedTopicsData = await currentTopicsResponse.json();
+
+            const selectedTopicsArray = typeof selectedTopicsData === 'string'
+                ? selectedTopicsData.split(',').filter(Boolean)
+                : selectedTopicsData;
 
             setTopics(topics);
-            setSelectedTopics(selectedTopics);
+            setSelectedTopics(selectedTopicsArray);
         } catch (error) {
             console.log(error);
         }
-    }
+    }, []);
+
+    const handleShow2 = useCallback(async (url) => {
+        setCurrentArticle(url);
+        await fetchTopics(url);
+        setShowModal2(true);
+    }, [fetchTopics])
+
 
     const updateTopics = async () => {
+        console.log('updateTopics called with:', selectedTopics, typeof selectedTopics);
         try {
-            const response = await fetch(`http://localhost:8080/article/topics?url=${currentArticle}`, {
+            const response = await fetch(`http://localhost:8080/article/topics?url=${encodeURIComponent(currentArticle)}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(selectedTopics)
+                body: JSON.stringify(selectedTopics),
             });
+
+            if (!response.ok) {
+                throw new Error("Failed to update topics");
+            }
 
             onArticleUpdated();
         } catch (error) {
@@ -54,6 +65,8 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
     }
 
     const handleCheckboxChange = (checked, topicId) => {
+        console.log('Checkbox change:', {checked, topicId});
+        console.log('Current selectedTopics:', selectedTopics, typeof selectedTopics);
         if (checked) {
             setSelectedTopics([...selectedTopics, topicId]);
         } else {
@@ -135,16 +148,17 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                                     >
                                                         <div className="py-1">
                                                             <MenuItem>
-                                                                <a
-                                                                    href="#"
-                                                                    onClick={() => {
-                                                                        handleShow2(article["url"]);
-                                                                        fetchTopics(article["url"])
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={(e) => {
+                                                                        // I think this fixes the recursion bug but removes UI niceties
+                                                                        e.preventDefault();
+                                                                        handleShow2(article.url);
                                                                     }}
-                                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                                                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
                                                                 >
                                                                     Edit Tags
-                                                                </a>
+                                                                </button>
                                                             </MenuItem>
                                                             <MenuItem>
                                                                 <a

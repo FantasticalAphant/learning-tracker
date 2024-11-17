@@ -1,7 +1,7 @@
 'use client'
 
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from '@headlessui/react'
+import {ExclamationTriangleIcon} from '@heroicons/react/24/outline'
 
 export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedTopics, handleCheckboxChange, updateTopics}) {
     return (
@@ -31,24 +31,20 @@ export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedT
                                         <fieldset>
                                             <legend className="sr-only">Tags</legend>
                                             <div className="space-y-5">
-
-
-                                            {topics.map(topic => (
+                                                {topics.map(topic => (
                                                     <div key={topic.id}>
                                                         <div className="relative flex items-start">
-                                                            <form>
-                                                                <div className="flex h-6 items-center">
-                                                                    <input
-                                                                        id={topic.name}
-                                                                        name={topic.name}
-                                                                        type="checkbox"
-                                                                        checked={selectedTopics.includes(topic.id)}
-                                                                        onChange={(e) => handleCheckboxChange(e.target.checked, topic.id)}
-                                                                        aria-describedby="tags-description"
-                                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                                    />
-                                                                </div>
-                                                            </form>
+                                                            <div className="flex h-6 items-center">
+                                                                <input
+                                                                    id={topic.name}
+                                                                    name={topic.name}
+                                                                    type="checkbox"
+                                                                    checked={selectedTopics.includes(topic.id)}
+                                                                    onChange={(e) => handleCheckboxChange(e.target.checked, topic.id)}
+                                                                    aria-describedby="tags-description"
+                                                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                                />
+                                                            </div>
                                                             <div className="ml-3 text-sm leading-6">
                                                                 <span id="candidates-description"
                                                                       className="text-gray-900">{topic.name}</span>
@@ -56,7 +52,6 @@ export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedT
                                                         </div>
                                                     </div>
                                                 ))}
-
                                             </div>
                                         </fieldset>
                                     </p>
@@ -65,8 +60,11 @@ export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedT
                         </div>
                         <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                             <button
-                                type="submit"
-                                onClick={() => {setOpen(false); updateTopics()}}
+                                type="button"
+                                onClick={() => {
+                                    updateTopics();
+                                    setOpen(false);
+                                }}
                                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                             >
                                 Update
