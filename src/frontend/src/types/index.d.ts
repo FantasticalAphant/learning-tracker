@@ -23,8 +23,8 @@ export interface Book {
     topics: string[];
 }
 
-export interface BookResponse {
-}
+// export interface BookResponse {
+// }
 
 export interface Video {
     videoId: string;
@@ -36,11 +36,11 @@ export interface Video {
     topics: number[];
 }
 
-export interface VideoResponse {
-}
+// export interface VideoResponse {
+// }
 
 export interface Task {
-    id: number;
+    id: string;
     content: string;
     completed: boolean;
 }

@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
+import {Topic} from "@/types";
 
 interface Params {
     params: { id: string; };
@@ -14,14 +15,13 @@ const tabs = [
     {name: 'Videos', endpoint: "/videos", current: false},
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-// @ts-ignore
 export default function IndividualTopicPage({params}: Params) {
     const {id} = params;
-    const [topic, setTopic] = useState([]);
+    const [topic, setTopic] = useState<Topic | null>(null);
     const [articles, setArticles] = useState([]);
     // const [books, setBooks] = useState([]);
     const [videos, setVideos] = useState([]);
@@ -83,9 +83,9 @@ export default function IndividualTopicPage({params}: Params) {
     return (
         <Shell highlightedTab={"Topics"}>
             <div className="pt-5 border-b border-gray-200 pb-5 sm:pb-0">
-                <p className="text-4xl font-semibold leading-6 text-gray-900">{topic["name"]}</p>
+                <p className="text-4xl font-semibold leading-6 text-gray-900">{topic?.name}</p>
                 <br/>
-                <p className="text-xl leading-6 text-gray-900">{topic["description"]}</p>
+                <p className="text-xl leading-6 text-gray-900">{topic?.description}</p>
                 <div className="mt-3 sm:mt-4">
                     <div className="sm:hidden">
                         <label htmlFor="current-tab" className="sr-only">
