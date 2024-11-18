@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import {Topic} from "@/types";
+import Link from "next/link";
 
 interface Params {
     params: { id: string; };
@@ -86,6 +87,7 @@ export default function IndividualTopicPage({params}: Params) {
                 <p className="text-4xl font-semibold leading-6 text-gray-900">{topic?.name}</p>
                 <br/>
                 <p className="text-xl leading-6 text-gray-900">{topic?.description}</p>
+                <Link href="/topics" className="flex justify-end">Return to Topics</Link>
                 <div className="mt-3 sm:mt-4">
                     <div className="sm:hidden">
                         <label htmlFor="current-tab" className="sr-only">
