@@ -76,7 +76,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     const deleteArticle = async (articleUrl) => {
         try {
-            const response = await fetch(`http://localhost:8080/article?url=${articleUrl}`, {
+            await fetch(`http://localhost:8080/article?url=${encodeURIComponent(articleUrl)}`, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
             });
