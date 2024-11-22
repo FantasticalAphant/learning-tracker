@@ -1,8 +1,7 @@
 import {useCallback, useState} from "react";
-import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import ArticleDeleteModal from "@/components/ArticleDeleteModal";
 import ArticleUpdateTagsModal from "@/components/ArticleUpdateTagsModal";
+import {ArticleMenu} from "@/components/ArticleMenu";
 
 export const ArticleList = ({articles, onArticleUpdated}) => {
     const [topics, setTopics] = useState([]);
@@ -46,7 +45,6 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
 
     const updateTopics = async () => {
-        console.log('updateTopics called with:', selectedTopics, typeof selectedTopics);
         try {
             const response = await fetch(`http://localhost:8080/article/topics?url=${encodeURIComponent(currentArticle)}`, {
                 method: "PUT",
@@ -119,7 +117,6 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                {/*FIXME: weird bug that makes Vue.js page unable to update tags or delete*/}
                                 {/*FIXME: doesn't seem to be happening for other articles regardless of position*/}
                                 {/*FIXME: also get a maximum update depth exceeded error sometimes*/}
                                 {articles.map((article) => (
@@ -131,48 +128,11 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                <Menu as="div" className="relative inline-block text-left">
-                                                    <div>
-                                                        <MenuButton
-                                                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                                            Actions
-                                                            <ChevronDownIcon aria-hidden="true"
-                                                                             className="-mr-1 h-5 w-5 text-gray-400"/>
-                                                        </MenuButton>
-                                                    </div>
-
-                                                    <MenuItems
-                                                        transition
-                                                        className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                                                    >
-                                                        <div className="py-1">
-                                                            <MenuItem>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={(e) => {
-                                                                        // I think this fixes the recursion bug but removes UI niceties
-                                                                        e.preventDefault();
-                                                                        handleShow2(article.url);
-                                                                    }}
-                                                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                                                                >
-                                                                    Edit Tags
-                                                                </button>
-                                                            </MenuItem>
-                                                            <MenuItem>
-                                                                <a
-                                                                    href="#"
-                                                                    onClick={() => handleShow1(article["url"])}
-                                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-                                                                >
-                                                                    Delete
-                                                                </a>
-                                                            </MenuItem>
-                                                        </div>
-                                                    </MenuItems>
-                                                </Menu>
-                                            </a>
+                                            <ArticleMenu
+                                                article={article}
+                                                onEdit={handleShow2}
+                                                onDelete={handleShow1}
+                                            />
                                         </td>
                                     </tr>
                                 ))}
