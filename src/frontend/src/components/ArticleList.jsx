@@ -101,15 +101,15 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Header #2
+                                        Date Added
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Header #3
+                                        Last Accessed
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Header #4
+                                        Website
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                         <span className="sr-only">Edit</span>
@@ -117,14 +117,14 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                {/*FIXME: doesn't seem to be happening for other articles regardless of position*/}
-                                {/*FIXME: also get a maximum update depth exceeded error sometimes*/}
                                 {articles.map((article) => (
                                     <tr key={article["url"]}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                             <a href={article["url"]}>{article["title"]}</a>
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {article["created"]}
+                                        </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
