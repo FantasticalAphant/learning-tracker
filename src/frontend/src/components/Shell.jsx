@@ -244,7 +244,7 @@ export default function Shell({children, highlightedTab}) {
                                     </div>
                                     <ul role="list" className="-mx-2 mt-2 space-y-1">
                                         {topics && topics.map((topic) => (
-                                            <li key={topic.title}>
+                                            <li key={topic.id}>
                                                 <Link
                                                     href={`/topics/${topic.id}`}
                                                     className={classNames(
