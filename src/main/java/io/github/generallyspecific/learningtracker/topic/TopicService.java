@@ -1,6 +1,7 @@
 package io.github.generallyspecific.learningtracker.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
-    public List<Topic> getTopics() {
+    public List<Topic> getTopics(int limit) {
+        System.out.println(limit);
+        if (limit > 0) {
+            return topicRepository.findBy(PageRequest.of(0, limit));
+        }
         return topicRepository.findAll();
     }
 

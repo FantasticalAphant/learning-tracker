@@ -16,8 +16,8 @@ public class TopicController {
     }
 
     @GetMapping("/topics")
-    public List<Topic> getTopics() {
-        return topicService.getTopics();
+    public List<Topic> getTopics(@RequestParam(required = false, defaultValue = "0") int limit) {
+        return topicService.getTopics(limit);
     }
 
     @PostMapping("/topics")
