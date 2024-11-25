@@ -1,4 +1,5 @@
 import "../../globals.css";
+import {TopicsProvider} from "@/contexts/TopicsContext";
 
 export const metadata = {
   title: 'Next.js',
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+    <body>
+    <TopicsProvider>
+      {children}
+    </TopicsProvider>
+    </body>
     </html>
   )
 }

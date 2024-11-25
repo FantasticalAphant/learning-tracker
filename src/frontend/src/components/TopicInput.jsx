@@ -1,8 +1,10 @@
 import {useState} from "react";
+import {useTopics} from "@/contexts/TopicsContext";
 
 export const TopicInput = ({onTopicsAdded}) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const {refreshTopics} = useTopics();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,6 +21,7 @@ export const TopicInput = ({onTopicsAdded}) => {
 
             if (response.ok) {
                 onTopicsAdded();
+                refreshTopics();
                 setName("");
                 setDescription("");
             }

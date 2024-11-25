@@ -4,9 +4,11 @@ import {useEffect, useState} from 'react'
 import {TopicCards} from "@/components/TopicCards.jsx";
 import {TopicInput} from "@/components/TopicInput";
 import Shell from "@/components/Shell";
+import {useTopics} from "@/contexts/TopicsContext";
 
 export default function TopicsPage() {
     const [topics, setTopics] = useState([]);
+    const {refreshTopics} = useTopics();
 
     const fetchTopics = async () => {
         try {
@@ -24,6 +26,7 @@ export default function TopicsPage() {
 
     const handleTopicsChanged = () => {
         fetchTopics();
+        refreshTopics();
     }
 
     return (

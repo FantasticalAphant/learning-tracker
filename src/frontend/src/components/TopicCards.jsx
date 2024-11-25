@@ -1,6 +1,9 @@
 import Link from "next/link";
+import {useTopics} from "@/contexts/TopicsContext";
 
 export const TopicCards = ({topics, onTopicsAdded}) => {
+    const {refreshTopics} = useTopics();
+
     const handleDelete = async (topicId) => {
         try {
             const response = await fetch(`http://localhost:8080/topics/${topicId}`, {
@@ -8,6 +11,8 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
             });
 
             onTopicsAdded();
+            refreshTopics();
+
             const data = await response.json();
             console.log(data);
         } catch (error) {
@@ -38,7 +43,7 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                             href={`#`}
                                             className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-2 text-sm text-gray-900 bg-blue-100 hover:bg-blue-300 hover:shadow"
                                         >
-                                            Change to Something Else
+                                            Update
                                         </Link>
                                     </div>
                                     <div className="-ml-px flex w-0 flex-1">

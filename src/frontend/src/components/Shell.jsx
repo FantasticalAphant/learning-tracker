@@ -31,6 +31,7 @@ import {
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/react/20/solid'
 import {TvIcon} from "@heroicons/react/24/outline/index";
 import Link from "next/link";
+import {useTopics} from "@/contexts/TopicsContext";
 
 const navigationTabs = [
     {name: 'Dashboard', href: '/', icon: HomeIcon, current: false},
@@ -41,11 +42,6 @@ const navigationTabs = [
     {name: 'Tasks', href: '/tasks', icon: CheckCircleIcon, current: false},
     {name: 'Notes', href: '/notes', icon: DocumentDuplicateIcon, current: false},
     {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
-]
-const teams = [
-    {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
-    {id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false},
-    {id: 3, name: 'Workcation', href: '#', initial: 'W', current: false},
 ]
 const userNavigation = [
     {name: 'Your profile', href: '#'},
@@ -59,18 +55,7 @@ function classNames(...classes) {
 export default function Shell({children, highlightedTab}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [navigation, setNavigation] = useState(navigationTabs)
-    const [topics, setTopics] = useState(null);
-
-    useEffect(() => {
-        const getTopics = async () => {
-            // get the top three topics and set them in the sidebar
-            const response = await fetch("http://localhost:8080/topics?limit=3");
-            const data = await response.json();
-            console.log(data)
-            setTopics(data);
-        }
-        getTopics();
-    }, []);
+    const {topics} = useTopics()
 
     useEffect(() => {
         setNavigation((prevNav) =>
