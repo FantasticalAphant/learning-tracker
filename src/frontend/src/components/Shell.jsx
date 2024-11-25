@@ -15,7 +15,6 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-import {Menu, MenuButton, MenuItem, MenuItems,} from '@headlessui/react'
 import {
     Bars3Icon,
     BellIcon,
@@ -28,7 +27,7 @@ import {
     FolderIcon,
     HomeIcon,
 } from '@heroicons/react/24/outline'
-import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/react/20/solid'
+import {MagnifyingGlassIcon} from '@heroicons/react/20/solid'
 import {TvIcon} from "@heroicons/react/24/outline/index";
 import Link from "next/link";
 import {useTopics} from "@/contexts/TopicsContext";
@@ -190,11 +189,7 @@ export default function Shell({children, highlightedTab}) {
                     <div
                         className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
                         <div className="flex h-16 shrink-0 items-center">
-                            <img
-                                alt="Your Company"
-                                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                                className="h-8 w-auto"
-                            />
+                            <p className="text-2xl text-indigo-600">Knowledge Tracker</p>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -306,42 +301,6 @@ export default function Shell({children, highlightedTab}) {
                                     <span className="sr-only">View notifications</span>
                                     <BellIcon aria-hidden="true" className="h-6 w-6"/>
                                 </button>
-
-                                {/* Separator */}
-                                <div aria-hidden="true" className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"/>
-
-                                {/* Profile dropdown */}
-                                <Menu as="div" className="relative">
-                                    <MenuButton className="-m-1.5 flex items-center p-1.5">
-                                        <span className="sr-only">Open user menu</span>
-                                        <img
-                                            alt=""
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            className="h-8 w-8 rounded-full bg-gray-50"
-                                        />
-                                        <span className="hidden lg:flex lg:items-center">
-                      <span aria-hidden="true" className="ml-4 text-sm font-semibold leading-6 text-gray-900">
-                        Tom Cook
-                      </span>
-                      <ChevronDownIcon aria-hidden="true" className="ml-2 h-5 w-5 text-gray-400"/>
-                    </span>
-                                    </MenuButton>
-                                    <MenuItems
-                                        transition
-                                        className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                                    >
-                                        {userNavigation.map((item) => (
-                                            <MenuItem key={item.name}>
-                                                <a
-                                                    href={item.href}
-                                                    className="block px-3 py-1 text-sm leading-6 text-gray-900 data-[focus]:bg-gray-50"
-                                                >
-                                                    {item.name}
-                                                </a>
-                                            </MenuItem>
-                                        ))}
-                                    </MenuItems>
-                                </Menu>
                             </div>
                         </div>
                     </div>
