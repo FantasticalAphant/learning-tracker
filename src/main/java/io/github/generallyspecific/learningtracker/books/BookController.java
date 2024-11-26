@@ -30,4 +30,9 @@ public class BookController {
         return bookService.findAll();
     }
 
+    @DeleteMapping("/books/{id}")
+    public void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
+    }
+
 }

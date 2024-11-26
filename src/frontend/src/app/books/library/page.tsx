@@ -8,24 +8,36 @@ import Link from "next/link";
 export default function BooksLibraryPage() {
     const [books, setBooks] = useState([]);
 
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/books", {
-                    method: "GET",
-                    headers: {"Content-Type": "application/json"},
-                });
+    const fetchBooks = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/books", {
+                method: "GET",
+                headers: {"Content-Type": "application/json"},
+            });
 
-                const data = await response.json();
-                console.log(data);
-                setBooks(data);
-            } catch (error) {
-                console.log(error);
-            }
+            const data = await response.json();
+            console.log(data);
+            setBooks(data);
+        } catch (error) {
+            console.log(error);
         }
+    }
 
+    useEffect(() => {
         fetchBooks();
     }, [])
+
+    const deleteBook = async (bookId: number) => {
+        try {
+            await fetch(`http://localhost:8080/books/${bookId}`, {
+                method: "DELETE",
+            });
+
+            fetchBooks();
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <Shell highlightedTab={"Books"}>
@@ -33,7 +45,7 @@ export default function BooksLibraryPage() {
                 <h1>Library</h1>
                 <Link href={"/books"}>Search books</Link>
             </div>
-            <BookLibrary books={books}/>
+            <BookLibrary books={books} handleDelete={deleteBook}/>
         </Shell>
     )
 }
