@@ -45,7 +45,7 @@ export default function BooksLibraryPage() {
                 <h1>Library</h1>
                 <Link href={"/books"}>Search books</Link>
             </div>
-            <BookLibrary books={books} handleDelete={deleteBook}/>
+            <BookLibrary books={books} handleDelete={deleteBook} handleUpdate={fetchBooks}/>
         </Shell>
     )
 }

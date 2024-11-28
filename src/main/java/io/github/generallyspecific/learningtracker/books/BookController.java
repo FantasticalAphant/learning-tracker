@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -35,4 +36,18 @@ public class BookController {
         bookService.deleteBook(id);
     }
 
+    @GetMapping("/books/topic/{topicId}")
+    public List<Book> getBooksByTopic(@PathVariable UUID topicId) {
+        return bookService.getBooksByTopic(topicId);
+    }
+
+    @GetMapping("/book/topics")
+    public List<UUID> getTopicsForBook(@RequestParam String id) {
+        return bookService.getTopicsForBook(id);
+    }
+
+    @PutMapping("/book/topics")
+    public void addTopicsToBook(@RequestParam String bookId, @RequestBody List<UUID> topicIds) {
+        bookService.addTopicsToBook(bookId, topicIds);
+    }
 }

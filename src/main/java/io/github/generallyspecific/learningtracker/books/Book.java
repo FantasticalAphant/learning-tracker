@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Document(collection="books")
 public class Book {
@@ -18,9 +19,9 @@ public class Book {
     private String description;
     private String thumbnail;
 
-    private List<String> topics;
+    private List<UUID> topics;
 
-    public Book(String isbn, String title, List<String> authors, String publisher, String publishedDate, String description, String thumbnail, List<String> topics) {
+    public Book(String isbn, String title, List<String> authors, String publisher, String publishedDate, String description, String thumbnail, List<UUID> topics) {
         this.isbn = isbn;
         this.title = title;
         this.authors = authors;
@@ -87,11 +88,11 @@ public class Book {
         this.thumbnail = thumbnail;
     }
 
-    public List<String> getTopics() {
+    public List<UUID> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<String> topics) {
+    public void setTopics(List<UUID> topics) {
         this.topics = topics;
     }
 
