@@ -30,4 +30,14 @@ public class VideoController {
     public List<Video> getVideosByTopic(@PathVariable UUID topicId) {
         return videoService.getVideosByTopic(topicId);
     }
+
+    @GetMapping("/video/topics")
+    public List<UUID> getTopicsForVideo(@RequestParam String videoId) {
+        return videoService.getTopicsForVideo(videoId);
+    }
+
+    @PutMapping("/video/topics")
+    public void addTopicsToVideo(@RequestParam String url, @RequestBody List<UUID> topicIds) {
+        videoService.addTopicsToVideo(url, topicIds);
+    }
 }

@@ -44,4 +44,15 @@ public class VideoService {
     public List<Video> getVideosByTopic(UUID topicId) {
         return videoRepository.findAllByTopic(topicId);
     }
+
+    public void addTopicsToVideo(String videoId, List<UUID> topicIds) {
+        videoRepository.findById(videoId).ifPresent(video -> {
+            video.setTopics(topicIds);
+            videoRepository.save(video);
+        });
+    }
+
+    public List<UUID> getTopicsForVideo(String videoId) {
+        return videoRepository.findById(videoId).map(Video::getTopics).orElse(new ArrayList<>());
+    }
 }
