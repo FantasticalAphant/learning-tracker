@@ -55,4 +55,8 @@ public class VideoService {
     public List<UUID> getTopicsForVideo(String videoId) {
         return videoRepository.findById(videoId).map(Video::getTopics).orElse(new ArrayList<>());
     }
+
+    public void deleteVideo(String id) {
+        videoRepository.deleteById(id);
+    }
 }

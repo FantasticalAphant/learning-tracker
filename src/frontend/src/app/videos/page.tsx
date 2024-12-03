@@ -9,20 +9,21 @@ export default function VideosPage() {
     const [videos, setVideos] = useState([]);
     const [savedVideos, setSavedVideos] = useState([]);
 
-    useEffect(() => {
-        const fetchSavedVideos = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/videos", {
-                    method: "GET",
-                    headers: {"Content-Type": "application/json"},
-                });
+    const fetchSavedVideos = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/videos", {
+                method: "GET",
+                headers: {"Content-Type": "application/json"},
+            });
 
-                const data = await response.json();
-                setSavedVideos(data);
-            } catch (error) {
-                console.log(error);
-            }
+            const data = await response.json();
+            setSavedVideos(data);
+        } catch (error) {
+            console.log(error);
         }
+    }
+
+    useEffect(() => {
         fetchSavedVideos();
     }, [videos])
 
@@ -42,6 +43,13 @@ export default function VideosPage() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const handleDelete = async (videoId: string) => {
+        await fetch(`http://localhost:8080/videos?id=${videoId}`, {
+            method: "DELETE"
+        })
+        fetchSavedVideos();
     }
 
     return (
@@ -78,7 +86,7 @@ export default function VideosPage() {
                 </div>
             </div>
 
-            <VideoTable videos={savedVideos}/>
+            <VideoTable videos={savedVideos} handleDelete={handleDelete}/>
         </Shell>
     )
 }

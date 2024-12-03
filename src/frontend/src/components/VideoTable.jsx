@@ -1,4 +1,4 @@
-export default function VideoTable({videos}) {
+export default function VideoTable({videos, handleDelete}) {
     return (
         <div>
             <div className="mt-8 flow-root">
@@ -46,6 +46,12 @@ export default function VideoTable({videos}) {
                                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
                                             Edit<span className="sr-only">, {video["videoTitle"]}</span>
                                         </a>
+                                    </td>
+                                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <button type="button" onClick={() => handleDelete(video["videoId"])}
+                                                className="text-red-600 hover:text-red-900">
+                                            Delete<span className="sr-only">, {video["videoTitle"]}</span>
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

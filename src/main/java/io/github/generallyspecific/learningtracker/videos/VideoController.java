@@ -26,6 +26,11 @@ public class VideoController {
         return videoService.getVideo(id);
     }
 
+    @DeleteMapping("/videos")
+    public void deleteVideo(@RequestParam String id) {
+        videoService.deleteVideo(id);
+    }
+
     @GetMapping("/videos/topic/{topicId}")
     public List<Video> getVideosByTopic(@PathVariable UUID topicId) {
         return videoService.getVideosByTopic(topicId);
