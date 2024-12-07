@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
-import ArticleDeleteModal from "@/components/ArticleDeleteModal";
-import ArticleUpdateTagsModal from "@/components/ArticleUpdateTagsModal";
-import {ArticleMenu} from "@/components/ArticleMenu";
+import ArticleDeleteModal from "@/components/articles/ArticleDeleteModal";
+import ArticleUpdateTagsModal from "@/components/articles/ArticleUpdateTagsModal";
+import {ArticleMenu} from "@/components/articles/ArticleMenu";
 
 export const ArticleList = ({articles, onArticleUpdated}) => {
     const [topics, setTopics] = useState([]);

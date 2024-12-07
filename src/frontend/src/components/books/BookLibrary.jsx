@@ -1,6 +1,6 @@
 import {XCircleIcon} from "@heroicons/react/16/solid";
 import {useCallback, useState} from "react";
-import BookUpdateTagModal from "@/components/BookUpdateTagModal";
+import BookUpdateTagModal from "@/components/books/BookUpdateTagModal";
 
 export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const [topics, setTopics] = useState([]);

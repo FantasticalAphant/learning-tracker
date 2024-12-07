@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from "react";
-import {BookList} from "@/components/BookList";
+import {BookList} from "@/components/books/BookList";
 import Link from "next/link";
 import Shell from "@/components/Shell";
 

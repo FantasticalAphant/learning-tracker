@@ -1,7 +1,7 @@
 'use client'
 
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from '@headlessui/react'
+import {ExclamationTriangleIcon} from '@heroicons/react/24/outline'
 
 export default function ArticleDeleteModal({open, setOpen, deleteArticle, currentArticle}) {
     return (
@@ -35,7 +35,10 @@ export default function ArticleDeleteModal({open, setOpen, deleteArticle, curren
                         <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                             <button
                                 type="button"
-                                onClick={() => {setOpen(false); console.log(currentArticle); deleteArticle(currentArticle)}}
+                                onClick={() => {
+                                    setOpen(false);
+                                    deleteArticle(currentArticle)
+                                }}
                                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                             >
                                 Delete

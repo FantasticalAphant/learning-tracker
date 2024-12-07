@@ -1,8 +1,8 @@
 "use client"
 
 import {useEffect, useState} from 'react'
-import {TopicCards} from "@/components/TopicCards.jsx";
-import {TopicInput} from "@/components/TopicInput";
+import {TopicCards} from "@/components/topics/TopicCards.jsx";
+import {TopicInput} from "@/components/topics/TopicInput";
 import Shell from "@/components/Shell";
 import {useTopics} from "@/contexts/TopicsContext";
 

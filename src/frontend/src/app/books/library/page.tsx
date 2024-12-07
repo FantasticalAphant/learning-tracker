@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
-import BookLibrary from "@/components/BookLibrary";
+import BookLibrary from "@/components/books/BookLibrary";
 import Link from "next/link";
 
 export default function BooksLibraryPage() {

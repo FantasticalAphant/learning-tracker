@@ -1,12 +1,12 @@
 "use client"
 
 import {useEffect, useState} from 'react';
-import {ArticleInput} from "@/components/ArticleInput.jsx";
-import {ArticleList} from "@/components/ArticleList.jsx";
+import {ArticleInput} from "@/components/articles/ArticleInput.jsx";
+import {ArticleList} from "@/components/articles/ArticleList.jsx";
 import Shell from "@/components/Shell";
 
 export default function ArticlesPage() {
-    // TODO: check out react-query
+    // TODO: check out tanstack-query
     const [articles, setArticles] = useState([]);
 
     const fetchArticles = async () => {

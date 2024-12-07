@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
-import VideoTable from "@/components/VideoTable";
+import VideoTable from "@/components/videos/VideoTable";
 
 export default function VideosPage() {
     const [videoUrl, setVideoUrl] = useState("");
