@@ -1,4 +1,75 @@
-export default function VideoTable({videos, handleDelete}) {
+import {useCallback, useState} from "react";
+import VideoUpdateTagsModal from "@/components/videos/VideoUpdateTagsModal";
+import VideoDeleteModal from "@/components/videos/VideoDeleteModal";
+
+export default function VideoTable({videos, handleDelete, handleUpdate}) {
+    const [topics, setTopics] = useState([]);
+    const [selectedTopics, setSelectedTopics] = useState([]);
+    const [showModal1, setShowModal1] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState("");
+
+    const updateTopics = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/video/topics?videoId=${encodeURIComponent(currentVideo)}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(selectedTopics),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update topics");
+            }
+
+            handleUpdate();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleCheckboxChange = (checked, topicId) => {
+        console.log('Checkbox change:', {checked, topicId});
+        console.log('Current selectedTopics:', selectedTopics, typeof selectedTopics);
+        if (checked) {
+            setSelectedTopics([...selectedTopics, topicId]);
+        } else {
+            setSelectedTopics(selectedTopics.filter(id => id !== topicId));
+        }
+    }
+
+    const fetchTopics = useCallback(async (url) => {
+        try {
+            const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
+                fetch("http://localhost:8080/topics"),
+                fetch(`http://localhost:8080/video/topics?videoId=${encodeURIComponent(url)}`)]
+            )
+
+            const topics = await allTopicsResponse.json();
+            const selectedTopicsData = await currentTopicsResponse.json();
+
+            const selectedTopicsArray = typeof selectedTopicsData === 'string'
+                ? selectedTopicsData.split(',').filter(Boolean)
+                : selectedTopicsData;
+
+            setTopics(topics);
+            setSelectedTopics(selectedTopicsArray);
+            console.log(selectedTopics)
+        } catch (error) {
+            console.log(error);
+        }
+    }, [selectedTopics]);
+
+    const handleShow1 = (videoId) => {
+        setCurrentVideo(videoId);
+        setShowModal1(true);
+    }
+
+    const handleShow2 = useCallback(async (videoId) => {
+        setCurrentVideo(videoId);
+        await fetchTopics(videoId);
+        setShowModal2(true);
+    }, [fetchTopics])
+
     return (
         <div>
             <div className="mt-8 flow-root">
@@ -43,12 +114,13 @@ export default function VideoTable({videos, handleDelete}) {
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{video["videoDescription"].slice(0, 50)}...</td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{new Date(video["publishedAt"]).toLocaleString()}</td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                            Edit<span className="sr-only">, {video["videoTitle"]}</span>
-                                        </a>
+                                        <button onClick={() => handleShow2(video["videoId"])}
+                                                className="text-indigo-600 hover:text-indigo-900">
+                                            Update <span className="sr-only">, {video["videoTitle"]}</span>
+                                        </button>
                                     </td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <button type="button" onClick={() => handleDelete(video["videoId"])}
+                                        <button type="button" onClick={() => handleShow1(video["videoId"])}
                                                 className="text-red-600 hover:text-red-900">
                                             Delete<span className="sr-only">, {video["videoTitle"]}</span>
                                         </button>
@@ -60,6 +132,13 @@ export default function VideoTable({videos, handleDelete}) {
                     </div>
                 </div>
             </div>
+
+            <VideoDeleteModal open={showModal1} setOpen={setShowModal1} currentVideo={currentVideo}
+                              deleteVideo={handleDelete}/>
+            <VideoUpdateTagsModal open={showModal2} setOpen={setShowModal2} topics={topics}
+                                  selectedTopics={selectedTopics} handleCheckboxChange={handleCheckboxChange}
+                                  updateTopics={updateTopics}/>
+
         </div>
     )
 }

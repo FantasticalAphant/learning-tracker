@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class VideoController {
     private final VideoService videoService;
 
@@ -42,7 +42,7 @@ public class VideoController {
     }
 
     @PutMapping("/video/topics")
-    public void addTopicsToVideo(@RequestParam String url, @RequestBody List<UUID> topicIds) {
-        videoService.addTopicsToVideo(url, topicIds);
+    public void addTopicsToVideo(@RequestParam String videoId, @RequestBody List<UUID> topicIds) {
+        videoService.addTopicsToVideo(videoId, topicIds);
     }
 }

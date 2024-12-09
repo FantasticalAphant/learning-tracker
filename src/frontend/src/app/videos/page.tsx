@@ -86,7 +86,7 @@ export default function VideosPage() {
                 </div>
             </div>
 
-            <VideoTable videos={savedVideos} handleDelete={handleDelete}/>
+            <VideoTable videos={savedVideos} handleDelete={handleDelete} handleUpdate={fetchSavedVideos}/>
         </Shell>
     )
 }
