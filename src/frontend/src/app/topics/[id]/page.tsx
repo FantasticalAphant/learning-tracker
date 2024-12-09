@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
-import {Topic} from "@/types";
+import {Article, Book, Topic, Video} from "@/types";
 import Link from "next/link";
 
 interface Params {
@@ -23,9 +23,9 @@ function classNames(...classes: string[]) {
 export default function IndividualTopicPage({params}: Params) {
     const {id} = params;
     const [topic, setTopic] = useState<Topic | null>(null);
-    const [articles, setArticles] = useState([]);
-    // const [books, setBooks] = useState([]);
-    const [videos, setVideos] = useState([]);
+    const [articles, setArticles] = useState<Article[]>([]);
+    const [books, setBooks] = useState<Book[]>([]);
+    const [videos, setVideos] = useState<Video[]>([]);
     const [activeTab, setActiveTab] = useState(tabs[0]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
@@ -60,18 +60,22 @@ export default function IndividualTopicPage({params}: Params) {
                 //     endpoints.map(endpoint => fetch(`http://localhost:8080${endpoint}/topic/${id}`).then(response => response.json()))
                 // );
 
-                const [articlesResponse, videosResponse] = await Promise.all([
+                const [articlesResponse, booksResponse, videosResponse] = await Promise.all([
                     fetch(`http://localhost:8080/articles/topic/${id}`),
+                    fetch(`http://localhost:8080/books/topic/${id}`),
                     fetch(`http://localhost:8080/videos/topic/${id}`),
                 ]);
 
                 const articles = await articlesResponse.json();
+                const books = await booksResponse.json();
                 const videos = await videosResponse.json();
 
                 console.log(articles);
+                console.log(books);
                 console.log(videos);
 
                 setArticles(articles);
+                setBooks(books);
                 setVideos(videos);
             } catch (error) {
                 console.log(error);
@@ -128,16 +132,23 @@ export default function IndividualTopicPage({params}: Params) {
             </div>
 
             {(activeTab.name === "Articles" || activeTab.name === "All") && articles && articles.map(article => (
-                <div key={article["id"]}>
-                    <h2>{article["title"]}</h2>
-                    <p>{article["content"]}</p>
+                <div key={article["url"]}>
+                    <p>{article["title"]}</p>
+                    <p>{new Date(article["created"]).toLocaleString()}</p>
+                </div>
+            ))}
+
+            {(activeTab.name === "Books" || activeTab.name === "All") && books && books.map(book => (
+                <div key={book["isbn"]}>
+                    <p>{book["title"]}</p>
+                    <p>{book["authors"]}</p>
                 </div>
             ))}
 
             {(activeTab.name === "Videos" || activeTab.name === "All") && videos && videos.map(video => (
-                <div key={video["id"]}>
-                    <h2>{video["title"]}</h2>
-                    <p>{video["description"]}</p>
+                <div key={video["videoId"]}>
+                    <p>{video["videoTitle"]}</p>
+                    <p>{video["videoDescription"].slice(0, 50)}...</p>
                 </div>
             ))}
 
