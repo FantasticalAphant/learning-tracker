@@ -5,12 +5,10 @@ export const ArticleInput = ({onArticleAdded}) => {
 
     const handleSubmit = async () => {
         try {
-            const newArticle = {url: articleUrl};
-
-            const response = await fetch("http://localhost:8080/articles", {
+            await fetch("http://localhost:8080/articles", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(newArticle)
+                body: JSON.stringify({url: articleUrl})
             });
 
             onArticleAdded();
