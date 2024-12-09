@@ -1,11 +1,13 @@
 import {XCircleIcon} from "@heroicons/react/16/solid";
 import {useCallback, useState} from "react";
 import BookUpdateTagModal from "@/components/books/BookUpdateTagModal";
+import BookDeleteModal from "@/components/books/BookDeleteModal";
 
 export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const [topics, setTopics] = useState([]);
     const [selectedTopics, setSelectedTopics] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal1, setShowModal1] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
     const [currentBook, setCurrentBook] = useState("");
 
     const handleCheckboxChange = (checked, topicId) => {
@@ -59,10 +61,15 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
         }
     }
 
-    const handleShow = useCallback(async (url) => {
+    const handleShow1 = (id) => {
+        setCurrentBook(id);
+        setShowModal1(true);
+    }
+
+    const handleShow2 = useCallback(async (url) => {
         setCurrentBook(url);
         await fetchTopics(url);
-        setShowModal(true);
+        setShowModal2(true);
     }, [fetchTopics])
 
 
@@ -75,7 +82,7 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
                         className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
                     >
                         <div className="flex flex-1 flex-col p-8">
-                            <button className="w-5" onClick={() => handleDelete(book["isbn"])}>
+                            <button className="w-5" onClick={() => handleShow1(book["isbn"])}>
                                 <XCircleIcon/>
                             </button>
                             <img alt="" src={book["thumbnail"]} className="mx-auto h-32 w-32 flex-shrink-0"/>
@@ -85,7 +92,7 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
                                 <dd className="text-sm text-gray-500">{book["authors"].join(",")}</dd>
                                 <dt className="sr-only">Role</dt>
                                 <dd className="mt-3">
-                                    <button onClick={() => handleShow(book["isbn"])}
+                                    <button onClick={() => handleShow2(book["isbn"])}
                                             className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 mb-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                         {book["topics"] || "No topics"}
                                     </button>
@@ -105,7 +112,10 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
                 ))}
             </ul>
 
-            <BookUpdateTagModal open={showModal} setOpen={setShowModal} topics={topics} selectedTopics={selectedTopics}
+            <BookDeleteModal open={showModal1} setOpen={setShowModal1} currentBook={currentBook}
+                             deleteBook={handleDelete}/>
+            <BookUpdateTagModal open={showModal2} setOpen={setShowModal2} topics={topics}
+                                selectedTopics={selectedTopics}
                                 handleCheckboxChange={handleCheckboxChange} updateTopics={updateTopics}/>
         </>
     )
