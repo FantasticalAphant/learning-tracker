@@ -1,6 +1,6 @@
 import {XCircleIcon} from "@heroicons/react/16/solid";
 import {useCallback, useState} from "react";
-import BookUpdateTagModal from "@/components/books/BookUpdateTagModal";
+import BookUpdateTagsModal from "@/components/books/BookUpdateTagsModal";
 import BookDeleteModal from "@/components/books/BookDeleteModal";
 
 export default function BookLibrary({books, handleDelete, handleUpdate}) {
@@ -114,9 +114,9 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
 
             <BookDeleteModal open={showModal1} setOpen={setShowModal1} currentBook={currentBook}
                              deleteBook={handleDelete}/>
-            <BookUpdateTagModal open={showModal2} setOpen={setShowModal2} topics={topics}
-                                selectedTopics={selectedTopics}
-                                handleCheckboxChange={handleCheckboxChange} updateTopics={updateTopics}/>
+            <BookUpdateTagsModal open={showModal2} setOpen={setShowModal2} topics={topics}
+                                 selectedTopics={selectedTopics}
+                                 handleCheckboxChange={handleCheckboxChange} updateTopics={updateTopics}/>
         </>
     )
 }

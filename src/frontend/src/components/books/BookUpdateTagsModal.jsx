@@ -3,14 +3,14 @@
 import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from '@headlessui/react'
 import {ExclamationTriangleIcon} from '@heroicons/react/24/outline'
 
-export default function BookUpdateTagModal({
-                                               open,
-                                               setOpen,
-                                               topics,
-                                               selectedTopics,
-                                               handleCheckboxChange,
-                                               updateTopics
-                                           }) {
+export default function BookUpdateTagsModal({
+                                                open,
+                                                setOpen,
+                                                topics,
+                                                selectedTopics,
+                                                handleCheckboxChange,
+                                                updateTopics
+                                            }) {
 
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
