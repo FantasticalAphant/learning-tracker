@@ -24,7 +24,6 @@ import {
     DocumentDuplicateIcon,
     DocumentTextIcon,
     FolderIcon,
-    HomeIcon,
     PencilSquareIcon,
 } from '@heroicons/react/24/outline'
 import {MagnifyingGlassIcon} from '@heroicons/react/20/solid'
@@ -33,7 +32,6 @@ import Link from "next/link";
 import {useTopics} from "@/contexts/TopicsContext";
 
 const navigationTabs = [
-    {name: 'Dashboard', href: '/', icon: HomeIcon, current: false},
     {name: 'Topics', href: '/topics', icon: FolderIcon, current: false},
     {name: 'Articles', href: '/articles', icon: DocumentTextIcon, current: false},
     {name: 'Books', href: '/books/library', icon: BookOpenIcon, current: false},
@@ -185,7 +183,8 @@ export default function Shell({children, highlightedTab}) {
                     <div
                         className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
                         <div className="flex h-16 shrink-0 items-center">
-                            <p className="text-2xl text-indigo-600">Knowledge Tracker</p>
+                            <Link href="/" className="text-2xl text-indigo-600 font-mono font-semibold mt-7">Knowledge
+                                Tracker</Link>
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
