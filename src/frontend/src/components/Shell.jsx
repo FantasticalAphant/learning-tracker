@@ -19,13 +19,13 @@ import {
     Bars3Icon,
     BellIcon,
     BookOpenIcon,
-    CalendarIcon,
     CheckCircleIcon,
     Cog6ToothIcon,
     DocumentDuplicateIcon,
     DocumentTextIcon,
     FolderIcon,
     HomeIcon,
+    PencilSquareIcon,
 } from '@heroicons/react/24/outline'
 import {MagnifyingGlassIcon} from '@heroicons/react/20/solid'
 import {TvIcon} from "@heroicons/react/24/outline/index";
@@ -39,12 +39,8 @@ const navigationTabs = [
     {name: 'Books', href: '/books/library', icon: BookOpenIcon, current: false},
     {name: 'Videos', href: '/videos', icon: TvIcon, current: false},
     {name: 'Tasks', href: '/tasks', icon: CheckCircleIcon, current: false},
-    {name: 'Notes', href: '/notes', icon: DocumentDuplicateIcon, current: false},
-    {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
-]
-const userNavigation = [
-    {name: 'Your profile', href: '#'},
-    {name: 'Sign out', href: '#'},
+    {name: 'Notes', href: '/notes', icon: PencilSquareIcon, current: false},
+    {name: 'Files', href: '/files', icon: DocumentDuplicateIcon, current: false},
 ]
 
 function classNames(...classes) {
