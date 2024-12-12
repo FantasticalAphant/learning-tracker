@@ -7,7 +7,7 @@ export default function FilesPage() {
         <div>
             <Shell highlightedTab={"Files"}>
                 {/*Use AWS S3 to handle files*/}
-                Files
+                <p className="text-4xl text-center">Files</p>
             </Shell>
         </div>
     )
