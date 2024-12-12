@@ -1,6 +1,9 @@
 import Link from "next/link";
+import BookNotification from "@/components/books/BookNotification";
+import {useState} from "react";
 
 export const BookList = ({books}) => {
+    const [show, setShow] = useState(false);
 
     const addBook = async (book) => {
         const postedBook = {
@@ -22,6 +25,7 @@ export const BookList = ({books}) => {
 
             const data = await response.json();
             console.log(data);
+            setShow(true);
         } catch (error) {
             console.log(error);
         }
@@ -68,6 +72,8 @@ export const BookList = ({books}) => {
                     </li>)
                 })}
             </ul>
+
+            <BookNotification show={show} setShow={setShow}/>
         </>
     )
 }
