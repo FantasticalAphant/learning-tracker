@@ -3,8 +3,18 @@
 import {Transition} from '@headlessui/react'
 import {CheckCircleIcon} from '@heroicons/react/24/outline'
 import {XMarkIcon} from '@heroicons/react/20/solid'
+import {useEffect} from "react";
 
 export default function BookNotification({show, setShow}) {
+
+    useEffect(() => {
+        // hide notification after 5 seconds
+        const timer = setTimeout(() => {
+            setShow(false);
+        }, 5000)
+
+        return () => clearTimeout(timer)
+    }, [show, setShow])
 
     return (
         <>
