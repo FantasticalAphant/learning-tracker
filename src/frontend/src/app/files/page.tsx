@@ -3,15 +3,25 @@
 import Shell from "@/components/Shell";
 import {PhotoIcon} from "@heroicons/react/16/solid";
 import React, {useEffect, useState} from "react";
+import {S3File} from "@/types";
+
+function formatBytes(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
 
 export default function FilesPage() {
     const [isUploading, setIsUploading] = useState(false);
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState<S3File[]>([]);
 
     const fetchFiles = async () => {
         const response = await fetch("http://localhost:8080/files/list");
         const data = await response.json();
 
+        console.log(data);
         setFiles(data);
     }
 
@@ -79,7 +89,18 @@ export default function FilesPage() {
                     </div>
                 </div>
 
-                {JSON.stringify(files)}
+                <ul>
+                    {files && files.map((file, index) => (
+                        <li key={index} className="border border-black rounded my-3 p-2">
+                            <a href={file["url"]} target="_blank" rel="noopener noreferrer">
+                                {file["filename"]}
+                            </a>
+                            <p>{formatBytes(file["size"])}</p>
+                            <p>Modified @ {new Date(file["lastModified"]).toLocaleString()}</p>
+                        </li>
+                    ))}
+                </ul>
+
             </Shell>
         </div>
     )

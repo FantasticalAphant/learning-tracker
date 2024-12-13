@@ -44,3 +44,10 @@ export interface Task {
     content: string;
     completed: boolean;
 }
+
+export interface S3File {
+    filename: string;
+    lastModified: Date;
+    size: number;
+    url: string;
+}
