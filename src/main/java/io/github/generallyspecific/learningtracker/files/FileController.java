@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,6 +22,7 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:3000")
 public class FileController {
     private final S3Client s3Client;
+    private final S3Presigner s3Presigner;
 
     @Value("${aws.bucket-name}")
     private String bucketName;
@@ -24,8 +30,9 @@ public class FileController {
     @Value("${aws.region}")
     private String region;
 
-    public FileController(S3Client s3Client) {
+    public FileController(S3Client s3Client, S3Presigner s3Presigner) {
         this.s3Client = s3Client;
+        this.s3Presigner = s3Presigner;
     }
 
     @PostMapping("/upload")
@@ -50,4 +57,43 @@ public class FileController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<S3FileDTO>> listFiles() {
+        try {
+            ListObjectsV2Request listRequest = ListObjectsV2Request.builder()
+                    .bucket(bucketName)
+                    .build();
+
+            ListObjectsV2Response listResponse = s3Client.listObjectsV2(listRequest);
+            List<S3FileDTO> files = listResponse.contents().stream()
+                    .map(s3Object -> new S3FileDTO(
+                            s3Object.key(),
+                            s3Object.size(),
+                            s3Object.lastModified(),
+                            generatePresignedUrl(s3Object.key())
+                    ))
+                    .toList();
+
+            return ResponseEntity.ok(files);
+        } catch (S3Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    private String generatePresignedUrl(String key) {
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(key)
+                .build();
+
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofHours(1))
+                .getObjectRequest(getObjectRequest)
+                .build();
+
+        PresignedGetObjectRequest presignedRequest = s3Presigner.presignGetObject(presignRequest);
+        return presignedRequest.url().toString();
+    }
+
 }

@@ -2,10 +2,22 @@
 
 import Shell from "@/components/Shell";
 import {PhotoIcon} from "@heroicons/react/16/solid";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export default function FilesPage() {
     const [isUploading, setIsUploading] = useState(false);
+    const [files, setFiles] = useState([]);
+
+    const fetchFiles = async () => {
+        const response = await fetch("http://localhost:8080/files/list");
+        const data = await response.json();
+
+        setFiles(data);
+    }
+
+    useEffect(() => {
+        fetchFiles();
+    }, [])
 
     const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         // TODO: handle multiple files
@@ -28,6 +40,8 @@ export default function FilesPage() {
 
             const fileUrl = await response.text();
             console.log("File uploaded successfully:", fileUrl);
+
+            fetchFiles()
         } catch (error) {
             console.error("Upload error:", error);
         } finally {
@@ -64,6 +78,8 @@ export default function FilesPage() {
                         <p className="text-xs/5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                     </div>
                 </div>
+
+                {JSON.stringify(files)}
             </Shell>
         </div>
     )
