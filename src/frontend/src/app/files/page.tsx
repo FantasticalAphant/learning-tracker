@@ -59,6 +59,21 @@ export default function FilesPage() {
         }
     }
 
+    const handleDelete = async (fileName: string) => {
+        try {
+            const response = await fetch(`http://localhost:8080/files/delete/${fileName}`, {
+                method: "DELETE",
+            });
+            if (!response.ok) {
+                throw new Error("Delete failed");
+            }
+
+            fetchFiles();
+        } catch (error) {
+            console.error("Delete error:", error);
+        }
+    }
+
     return (
         <div>
             <Shell highlightedTab={"Files"}>
@@ -92,9 +107,14 @@ export default function FilesPage() {
                 <ul>
                     {files && files.map((file, index) => (
                         <li key={index} className="border border-black rounded my-3 p-2">
-                            <a href={file["url"]} target="_blank" rel="noopener noreferrer">
-                                {file["filename"]}
-                            </a>
+                            <div className="flex justify-between">
+                                <a href={file["url"]} target="_blank" rel="noopener noreferrer">
+                                    {file["filename"]}
+                                </a>
+                                <button onClick={() => handleDelete(file["filename"])} type="button">
+                                    X
+                                </button>
+                            </div>
                             <p>{formatBytes(file["size"])}</p>
                             <p>Modified @ {new Date(file["lastModified"]).toLocaleString()}</p>
                         </li>
