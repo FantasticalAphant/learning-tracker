@@ -101,7 +101,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Date Added
+                                        Added On
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -120,10 +120,10 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 {articles.map((article) => (
                                     <tr key={article["url"]}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            <a href={article["url"]}>{article["title"]}</a>
+                                            <a href={article["url"]}>{article["title"].slice(0, 60)}{article["title"].length > 60 && "..."}</a>
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {article["created"]}
+                                            {new Date(article["created"]).toLocaleString()}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
