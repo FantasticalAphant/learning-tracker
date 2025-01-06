@@ -8,6 +8,7 @@ import {useTopics} from "@/contexts/TopicsContext";
 
 export default function TopicsPage() {
     const [topics, setTopics] = useState([]);
+    // @ts-ignore
     const {refreshTopics} = useTopics();
 
     const fetchTopics = async () => {
