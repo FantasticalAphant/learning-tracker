@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 import {ArticleInput} from "@/components/articles/ArticleInput.jsx";
 import {ArticleList} from "@/components/articles/ArticleList.jsx";
 import Shell from "@/components/Shell";
+import {API_URL} from "@/utils/api";
 
 export default function ArticlesPage() {
     // TODO: check out tanstack-query
@@ -11,7 +12,7 @@ export default function ArticlesPage() {
 
     const fetchArticles = async () => {
         try {
-            const response = await fetch("http://localhost:8080/articles");
+            const response = await fetch(`${API_URL}/articles`);
             const articles = await response.json();
             setArticles(articles);
         } catch (error) {

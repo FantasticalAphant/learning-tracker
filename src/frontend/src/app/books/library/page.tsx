@@ -4,13 +4,14 @@ import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import BookLibrary from "@/components/books/BookLibrary";
 import Link from "next/link";
+import {API_URL} from "@/utils/api";
 
 export default function BooksLibraryPage() {
     const [books, setBooks] = useState([]);
 
     const fetchBooks = async () => {
         try {
-            const response = await fetch("http://localhost:8080/books", {
+            const response = await fetch(`${API_URL}/books`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
             });
@@ -29,7 +30,7 @@ export default function BooksLibraryPage() {
 
     const deleteBook = async (bookId: number) => {
         try {
-            await fetch(`http://localhost:8080/books/${bookId}`, {
+            await fetch(`${API_URL}/books/${bookId}`, {
                 method: "DELETE",
             });
 

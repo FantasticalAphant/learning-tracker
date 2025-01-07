@@ -2,6 +2,7 @@ import {XCircleIcon} from "@heroicons/react/16/solid";
 import {useCallback, useState} from "react";
 import BookUpdateTagsModal from "@/components/books/BookUpdateTagsModal";
 import BookDeleteModal from "@/components/books/BookDeleteModal";
+import {API_URL} from "@/utils/api";
 
 export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const [topics, setTopics] = useState([]);
@@ -23,8 +24,8 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const fetchTopics = useCallback(async (url) => {
         try {
             const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
-                fetch("http://localhost:8080/topics"),
-                fetch(`http://localhost:8080/book/topics?id=${encodeURIComponent(url)}`)]
+                fetch(`${API_URL}/topics`),
+                fetch(`${API_URL}/book/topics?id=${encodeURIComponent(url)}`)]
             )
 
             const topics = await allTopicsResponse.json();
@@ -45,7 +46,7 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
 
     const updateTopics = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/book/topics?bookId=${encodeURIComponent(currentBook)}`, {
+            const response = await fetch(`${API_URL}/book/topics?bookId=${encodeURIComponent(currentBook)}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(selectedTopics),

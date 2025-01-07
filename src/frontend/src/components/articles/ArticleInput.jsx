@@ -1,11 +1,12 @@
 import {useState} from "react";
+import {API_URL} from "@/utils/api";
 
 export const ArticleInput = ({onArticleAdded}) => {
     const [articleUrl, setArticleUrl] = useState("");
 
     const handleSubmit = async () => {
         try {
-            await fetch("http://localhost:8080/articles", {
+            await fetch(`${API_URL}/articles`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({url: articleUrl})

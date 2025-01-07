@@ -1,5 +1,6 @@
 'use client'
 import React, {createContext, useContext, useEffect, useState} from 'react';
+import {API_URL} from "@/utils/api";
 
 const TopicsContext = createContext(null);
 
@@ -9,7 +10,7 @@ export function TopicsProvider({children}) {
     useEffect(() => {
         const fetchTopics = async () => {
             try {
-                const response = await fetch("http://localhost:8080/topics?limit=3");
+                const response = await fetch(`${API_URL}/topics?limit=3`);
                 const data = await response.json();
                 setTopics(data);
             } catch (error) {

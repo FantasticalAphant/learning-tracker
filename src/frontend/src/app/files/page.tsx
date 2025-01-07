@@ -4,6 +4,7 @@ import Shell from "@/components/Shell";
 import React, {useEffect, useState} from "react";
 import {S3File} from "@/types";
 import {DocumentPlusIcon} from "@heroicons/react/16/solid";
+import {API_URL} from "@/utils/api";
 
 function formatBytes(bytes: number): string {
     if (bytes === 0) return '0 Bytes';
@@ -18,7 +19,7 @@ export default function FilesPage() {
     const [files, setFiles] = useState<S3File[]>([]);
 
     const fetchFiles = async () => {
-        const response = await fetch("http://localhost:8080/files/list");
+        const response = await fetch("${API_URL}/files/list");
         const data = await response.json();
 
         console.log(data);
@@ -39,7 +40,7 @@ export default function FilesPage() {
         formData.append("file", file)
 
         try {
-            const response = await fetch("http://localhost:8080/files/upload", {
+            const response = await fetch(`${API_URL}/files/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -61,7 +62,7 @@ export default function FilesPage() {
 
     const handleDelete = async (fileName: string) => {
         try {
-            const response = await fetch(`http://localhost:8080/files/delete/${fileName}`, {
+            const response = await fetch(`${API_URL}/files/delete/${fileName}`, {
                 method: "DELETE",
             });
             if (!response.ok) {

@@ -1,6 +1,7 @@
 import {useCallback, useState} from "react";
 import VideoUpdateTagsModal from "@/components/videos/VideoUpdateTagsModal";
 import VideoDeleteModal from "@/components/videos/VideoDeleteModal";
+import {API_URL} from "@/utils/api";
 
 export default function VideoTable({videos, handleDelete, handleUpdate}) {
     const [topics, setTopics] = useState([]);
@@ -11,7 +12,7 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
 
     const updateTopics = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/video/topics?videoId=${encodeURIComponent(currentVideo)}`, {
+            const response = await fetch(`${API_URL}/video/topics?videoId=${encodeURIComponent(currentVideo)}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(selectedTopics),
@@ -40,8 +41,8 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
     const fetchTopics = useCallback(async (url) => {
         try {
             const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
-                fetch("http://localhost:8080/topics"),
-                fetch(`http://localhost:8080/video/topics?videoId=${encodeURIComponent(url)}`)]
+                fetch(`${API_URL}/topics`),
+                fetch(`${API_URL}/video/topics?videoId=${encodeURIComponent(url)}`)]
             )
 
             const topics = await allTopicsResponse.json();

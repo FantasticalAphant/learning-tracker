@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import VideoTable from "@/components/videos/VideoTable";
+import {API_URL} from "@/utils/api";
 
 export default function VideosPage() {
     const [videoUrl, setVideoUrl] = useState("");
@@ -11,7 +12,7 @@ export default function VideosPage() {
 
     const fetchSavedVideos = async () => {
         try {
-            const response = await fetch("http://localhost:8080/videos", {
+            const response = await fetch(`${API_URL}/videos`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
             });
@@ -31,7 +32,7 @@ export default function VideosPage() {
         const videoId = videoUrl.split("v=")[1].split("&")[0];
 
         try {
-            const response = await fetch(`http://localhost:8080/videos?id=${videoId}`, {
+            const response = await fetch(`${API_URL}/videos?id=${videoId}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
             });
@@ -46,7 +47,7 @@ export default function VideosPage() {
     }
 
     const handleDelete = async (videoId: string) => {
-        await fetch(`http://localhost:8080/videos?id=${videoId}`, {
+        await fetch(`${API_URL}/videos?id=${videoId}`, {
             method: "DELETE"
         })
         fetchSavedVideos();

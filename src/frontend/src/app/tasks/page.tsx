@@ -2,6 +2,7 @@
 
 import Shell from "@/components/Shell";
 import {useEffect, useState} from "react";
+import {API_URL} from "@/utils/api";
 
 export default function TasksPage() {
     const [tasks, setTasks] = useState([]);
@@ -9,7 +10,7 @@ export default function TasksPage() {
 
     const fetchTasks = async () => {
         try {
-            const response = await fetch("http://localhost:8080/tasks", {
+            const response = await fetch(`${API_URL}/tasks`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
             });
@@ -27,7 +28,7 @@ export default function TasksPage() {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch("http://localhost:8080/tasks", {
+            const response = await fetch(`${API_URL}/tasks`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({content: taskContent}),

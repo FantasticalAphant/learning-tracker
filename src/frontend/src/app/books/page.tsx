@@ -4,6 +4,7 @@ import {useState} from "react";
 import {BookList} from "@/components/books/BookList";
 import Link from "next/link";
 import Shell from "@/components/Shell";
+import {API_URL} from "@/utils/api";
 
 export default function BooksPage() {
     const [query, setQuery] = useState('');
@@ -11,7 +12,7 @@ export default function BooksPage() {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/books/search?query=${query}&maxResults=20`, {
+            const response = await fetch(`${API_URL}/books/search?query=${query}&maxResults=20`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
             });

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useTopics} from "@/contexts/TopicsContext";
+import {API_URL} from "@/utils/api";
 
 export const TopicInput = ({onTopicsAdded}) => {
     const [name, setName] = useState("");
@@ -10,7 +11,7 @@ export const TopicInput = ({onTopicsAdded}) => {
         event.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/topics", {
+            const response = await fetch(`${API_URL}/topics`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

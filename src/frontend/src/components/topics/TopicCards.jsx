@@ -1,12 +1,13 @@
 import Link from "next/link";
 import {useTopics} from "@/contexts/TopicsContext";
+import {API_URL} from "@/utils/api";
 
 export const TopicCards = ({topics, onTopicsAdded}) => {
     const {refreshTopics} = useTopics();
 
     const handleDelete = async (topicId) => {
         try {
-            const response = await fetch(`http://localhost:8080/topics/${topicId}`, {
+            const response = await fetch(`${API_URL}/topics/${topicId}`, {
                 method: "DELETE",
             });
 

@@ -5,6 +5,7 @@ import {TopicCards} from "@/components/topics/TopicCards.jsx";
 import {TopicInput} from "@/components/topics/TopicInput";
 import Shell from "@/components/Shell";
 import {useTopics} from "@/contexts/TopicsContext";
+import {API_URL} from "@/utils/api";
 
 export default function TopicsPage() {
     const [topics, setTopics] = useState([]);
@@ -13,7 +14,7 @@ export default function TopicsPage() {
 
     const fetchTopics = async () => {
         try {
-            const response = await fetch("http://localhost:8080/topics");
+            const response = await fetch(`${API_URL}/topics`);
             const topics = await response.json();
             setTopics(topics);
         } catch (error) {

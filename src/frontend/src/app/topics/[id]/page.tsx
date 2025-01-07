@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import {Article, Book, Topic, Video} from "@/types";
 import Link from "next/link";
+import {API_URL} from "@/utils/api";
 
 interface Params {
     params: { id: string; };
@@ -34,7 +35,7 @@ export default function IndividualTopicPage({params}: Params) {
     useEffect(() => {
         const fetchTopic = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/topics/${id}`);
+                const response = await fetch(`${API_URL}/topics/${id}`);
                 const topic = await response.json();
                 setTopic(topic);
                 console.log(topic);
@@ -61,9 +62,9 @@ export default function IndividualTopicPage({params}: Params) {
                 // );
 
                 const [articlesResponse, booksResponse, videosResponse] = await Promise.all([
-                    fetch(`http://localhost:8080/articles/topic/${id}`),
-                    fetch(`http://localhost:8080/books/topic/${id}`),
-                    fetch(`http://localhost:8080/videos/topic/${id}`),
+                    fetch(`${API_URL}/articles/topic/${id}`),
+                    fetch(`${API_URL}/books/topic/${id}`),
+                    fetch(`${API_URL}/videos/topic/${id}`),
                 ]);
 
                 const articles = await articlesResponse.json();

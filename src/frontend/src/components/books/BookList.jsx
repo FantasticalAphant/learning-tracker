@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BookNotification from "@/components/books/BookNotification";
 import {useState} from "react";
+import {API_URL} from "@/utils/api";
 
 export const BookList = ({books}) => {
     const [show, setShow] = useState(false);
@@ -17,7 +18,7 @@ export const BookList = ({books}) => {
         }
 
         try {
-            const response = await fetch("http://localhost:8080/books", {
+            const response = await fetch(`${API_URL}/books`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(postedBook),

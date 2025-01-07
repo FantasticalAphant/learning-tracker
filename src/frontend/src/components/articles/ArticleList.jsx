@@ -2,6 +2,7 @@ import {useCallback, useState} from "react";
 import ArticleDeleteModal from "@/components/articles/ArticleDeleteModal";
 import ArticleUpdateTagsModal from "@/components/articles/ArticleUpdateTagsModal";
 import {ArticleMenu} from "@/components/articles/ArticleMenu";
+import {API_URL} from "@/utils/api";
 
 export const ArticleList = ({articles, onArticleUpdated}) => {
     const [topics, setTopics] = useState([]);
@@ -19,8 +20,8 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
     const fetchTopics = useCallback(async (url) => {
         try {
             const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
-                fetch("http://localhost:8080/topics"),
-                fetch(`http://localhost:8080/article/topics?url=${encodeURIComponent(url)}`)]
+                fetch(`${API_URL}/topics`),
+                fetch(`${API_URL}/topics/topics?url=${encodeURIComponent(url)}`)]
             )
 
             const topics = await allTopicsResponse.json();
@@ -46,7 +47,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     const updateTopics = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/article/topics?url=${encodeURIComponent(currentArticle)}`, {
+            const response = await fetch(`${API_URL}/article/topics?url=${encodeURIComponent(currentArticle)}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(selectedTopics),
@@ -74,7 +75,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     const deleteArticle = async (articleUrl) => {
         try {
-            await fetch(`http://localhost:8080/article?url=${encodeURIComponent(articleUrl)}`, {
+            await fetch(`${API_URL}/article?url=${encodeURIComponent(articleUrl)}`, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
             });
