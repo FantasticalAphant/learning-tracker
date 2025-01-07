@@ -19,7 +19,7 @@ export default function FilesPage() {
     const [files, setFiles] = useState<S3File[]>([]);
 
     const fetchFiles = async () => {
-        const response = await fetch("${API_URL}/files/list");
+        const response = await fetch(`${API_URL}/files/list`);
         const data = await response.json();
 
         console.log(data);
