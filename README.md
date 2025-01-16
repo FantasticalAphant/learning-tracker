@@ -1,5 +1,13 @@
 # learning tracker
 
+This web application allows you to keep tabs on your learning.
+You are able to track articles you come across the internet, videos you would like to save, books you would like to or are
+currently reading, and much more!
+You can also group all of these under a specific topic. For example, you can create a topic called React with which you
+can associate articles, books, and videos under.
+
+The frontend is built using Next.js and the backend is built using Spring. The database used is MongoDB.
+
 ### Setting up environment variables:
 
 ```sh
