@@ -45,4 +45,9 @@ public class ArticleController {
     public List<Article> getArticlesByTopic(@PathVariable UUID topicId) {
         return articleService.getArticlesByTopic(topicId);
     }
+
+    @PutMapping("/article/access")
+    public void updateLastAccessed(@RequestParam String url) {
+        articleService.updateLastAccessed(url);
+    }
 }

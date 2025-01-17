@@ -86,6 +86,23 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
         }
     }
 
+    const handleArticleClick = async (articleUrl) => {
+        try {
+            await fetch(`${API_URL}/article/access?url=${encodeURIComponent(articleUrl)}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                keepalive: true
+            });
+
+        } catch (error) {
+            console.error(error)
+        } finally {
+            window.location.href = articleUrl
+        }
+    }
+
     return (
         <>
             <div>
@@ -121,12 +138,19 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 {articles.map((article) => (
                                     <tr key={article["url"]}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            <a href={article["url"]}>{article["title"].slice(0, 60)}{article["title"].length > 60 && "..."}</a>
+                                            <a href="#" onClick={(e) => {
+                                                e.preventDefault(); // don't jump to top of the page
+                                                handleArticleClick(article["url"]);
+                                            }}>
+                                                {article["title"].slice(0, 60)}{article["title"].length > 60 && "..."}
+                                            </a>
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {new Date(article["created"]).toLocaleString()}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {new Date(article["accessed"]).toLocaleString()}
+                                        </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <ArticleMenu

@@ -15,13 +15,15 @@ public class Article {
     private String title;
     private String site;
     private Instant created;
+    private Instant accessed;
     private List<UUID> topics;
 
-    public Article(String url, String title, String site, Instant created, List<UUID> topics) {
+    public Article(String url, String title, String site, Instant created, Instant accessed, List<UUID> topics) {
         this.url = url;
         this.title = title;
         this.site = site;
         this.created = created;
+        this.accessed = accessed;
         this.topics = topics;
     }
 
@@ -57,6 +59,14 @@ public class Article {
         this.created = created;
     }
 
+    public Instant getAccessed() {
+        return accessed;
+    }
+
+    public void setAccessed(Instant accessed) {
+        this.accessed = accessed;
+    }
+
     public List<UUID> getTopics() {
         return topics;
     }
@@ -67,15 +77,14 @@ public class Article {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Article article = (Article) o;
-        return Objects.equals(url, article.url) && Objects.equals(title, article.title) && Objects.equals(site, article.site) && Objects.equals(created, article.created) && Objects.equals(topics, article.topics);
+        return Objects.equals(url, article.url) && Objects.equals(title, article.title) && Objects.equals(site, article.site) && Objects.equals(created, article.created) && Objects.equals(accessed, article.accessed) && Objects.equals(topics, article.topics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, title, site, created, topics);
+        return Objects.hash(url, title, site, created, accessed, topics);
     }
 
     @Override
@@ -85,6 +94,7 @@ public class Article {
                 ", title='" + title + '\'' +
                 ", site='" + site + '\'' +
                 ", created=" + created +
+                ", accessed=" + accessed +
                 ", topics=" + topics +
                 '}';
     }

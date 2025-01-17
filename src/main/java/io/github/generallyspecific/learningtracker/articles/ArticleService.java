@@ -70,4 +70,11 @@ public class ArticleService {
     public List<UUID> getTopicsForArticle(String url) {
         return articleRepository.findById(url).map(Article::getTopics).orElse(new ArrayList<>());
     }
+
+    public void updateLastAccessed(String url) {
+        articleRepository.findById(url).ifPresent(article -> {
+            article.setAccessed(Instant.now());
+            articleRepository.save(article);
+        });
+    }
 }

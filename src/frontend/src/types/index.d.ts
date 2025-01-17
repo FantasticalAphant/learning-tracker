@@ -9,6 +9,7 @@ export interface Article {
     title: string;
     site: string;
     created: Date;
+    accessed: Date;
     topics: number[];
 }
 
