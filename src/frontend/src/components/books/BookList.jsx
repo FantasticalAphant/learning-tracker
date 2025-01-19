@@ -24,11 +24,14 @@ export const BookList = ({books}) => {
                 body: JSON.stringify(postedBook),
             });
 
-            const data = await response.json();
-            console.log(data);
+            if (!response.ok) {
+                throw Error("Fetch failed");
+            }
+
+            await response.json();
             setShow(true);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

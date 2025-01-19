@@ -18,7 +18,7 @@ export default function TasksPage() {
             const data = await response.json();
             setTasks(data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -35,10 +35,9 @@ export default function TasksPage() {
             });
 
             fetchTasks();
-            const data = await response.json();
-            console.log(data);
+            await response.json();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
 
         setTaskContent("");

@@ -24,13 +24,11 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
 
             handleUpdate();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
     const handleCheckboxChange = (checked, topicId) => {
-        console.log('Checkbox change:', {checked, topicId});
-        console.log('Current selectedTopics:', selectedTopics, typeof selectedTopics);
         if (checked) {
             setSelectedTopics([...selectedTopics, topicId]);
         } else {
@@ -54,9 +52,8 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
 
             setTopics(topics);
             setSelectedTopics(selectedTopicsArray);
-            console.log(selectedTopics)
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }, [selectedTopics]);
 

@@ -38,9 +38,8 @@ export default function IndividualTopicPage({params}: Params) {
                 const response = await fetch(`${API_URL}/topics/${id}`);
                 const topic = await response.json();
                 setTopic(topic);
-                console.log(topic);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
         fetchTopic();
@@ -71,19 +70,15 @@ export default function IndividualTopicPage({params}: Params) {
                 const books = await booksResponse.json();
                 const videos = await videosResponse.json();
 
-                console.log(articles);
-                console.log(books);
-                console.log(videos);
-
                 setArticles(articles);
                 setBooks(books);
                 setVideos(videos);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         };
 
-        fetchTopic().then(r => console.log(r));
+        fetchTopic();
     }, [id, activeTab])
 
     return (

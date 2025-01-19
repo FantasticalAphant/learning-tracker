@@ -14,10 +14,13 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
             onTopicsAdded();
             refreshTopics();
 
-            const data = await response.json();
-            console.log(data);
+            if (!response.ok) {
+                throw Error("Fetch failed");
+            }
+
+            await response.json();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

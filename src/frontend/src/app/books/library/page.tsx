@@ -17,10 +17,9 @@ export default function BooksLibraryPage() {
             });
 
             const data = await response.json();
-            console.log(data);
             setBooks(data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -36,7 +35,7 @@ export default function BooksLibraryPage() {
 
             fetchBooks();
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 

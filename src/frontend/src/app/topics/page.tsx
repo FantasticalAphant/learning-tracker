@@ -18,12 +18,12 @@ export default function TopicsPage() {
             const topics = await response.json();
             setTopics(topics);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
     useEffect(() => {
-        fetchTopics().then(r => console.log(r));
+        fetchTopics();
     }, [])
 
     const handleTopicsChanged = () => {

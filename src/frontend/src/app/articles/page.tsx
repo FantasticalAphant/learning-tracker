@@ -16,12 +16,12 @@ export default function ArticlesPage() {
             const articles = await response.json();
             setArticles(articles);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
     useEffect(() => {
-        fetchArticles().then(r => console.log(r));
+        fetchArticles();
     }, [])
 
     const handleArticlesChanged = () => {

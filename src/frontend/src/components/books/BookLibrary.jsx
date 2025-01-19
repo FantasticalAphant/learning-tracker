@@ -12,8 +12,6 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const [currentBook, setCurrentBook] = useState("");
 
     const handleCheckboxChange = (checked, topicId) => {
-        console.log('Checkbox change:', {checked, topicId});
-        console.log('Current selectedTopics:', selectedTopics, typeof selectedTopics);
         if (checked) {
             setSelectedTopics([...selectedTopics, topicId]);
         } else {
@@ -37,9 +35,8 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
 
             setTopics(topics);
             setSelectedTopics(selectedTopicsArray);
-            console.log(selectedTopics)
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }, [selectedTopics]);
 
@@ -58,7 +55,7 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
 
             handleUpdate();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

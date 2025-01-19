@@ -22,7 +22,6 @@ export default function FilesPage() {
         const response = await fetch(`${API_URL}/files/list`);
         const data = await response.json();
 
-        console.log(data);
         setFiles(data);
     }
 

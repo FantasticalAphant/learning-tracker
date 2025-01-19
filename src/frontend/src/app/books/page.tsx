@@ -18,12 +18,11 @@ export default function BooksPage() {
             });
 
             const data = await response.json();
-            console.log(data.items);
             setResults(data.items || []);
 
             setQuery("");
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

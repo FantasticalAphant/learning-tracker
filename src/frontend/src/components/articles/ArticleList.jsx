@@ -34,7 +34,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
             setTopics(topics);
             setSelectedTopics(selectedTopicsArray);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }, []);
 
@@ -59,13 +59,11 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
             onArticleUpdated();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
     const handleCheckboxChange = (checked, topicId) => {
-        console.log('Checkbox change:', {checked, topicId});
-        console.log('Current selectedTopics:', selectedTopics, typeof selectedTopics);
         if (checked) {
             setSelectedTopics([...selectedTopics, topicId]);
         } else {
@@ -82,7 +80,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
             onArticleUpdated();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
