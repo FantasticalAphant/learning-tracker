@@ -1,9 +1,10 @@
 "use client"
 
 import Shell from "@/components/Shell";
-import ReactMarkdown from 'react-markdown'
+import Markdown from 'react-markdown'
 import MarkdownEditor from "@/components/MarkdownEditor";
 import {useState} from "react";
+import remarkGfm from "remark-gfm";
 
 export default function NotesPage() {
     const [text, setText] = useState(`# Welcome to the Markdown Editor
@@ -21,7 +22,10 @@ This editor supports:
                 {/*TODO: Allow user to add notes and then link them to topics*/}
                 <div className="flex justify-around">
                     <MarkdownEditor text={text} setText={setText}/>
-                    <ReactMarkdown className="prose">{text}</ReactMarkdown>
+                    {/*Use remarkGfm plugin for extended markdown support*/}
+                    <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                        {text}
+                    </Markdown>
                 </div>
             </Shell>
         </div>
