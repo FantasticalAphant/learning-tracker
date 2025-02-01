@@ -3,9 +3,10 @@
 import Shell from "@/components/Shell";
 import {useEffect, useState} from "react";
 import {API_URL} from "@/utils/api";
+import {Task} from "@/types";
 
 export default function TasksPage() {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState<Task[]>([]);
     const [taskContent, setTaskContent] = useState("");
 
     const fetchTasks = async () => {
@@ -43,6 +44,23 @@ export default function TasksPage() {
         setTaskContent("");
     }
 
+    const handleCheckboxChange = async (taskId: number, completed: boolean) => {
+        try {
+            await fetch(`${API_URL}/tasks/${taskId}`, {
+                method: "PATCH",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({completed: !completed})
+            });
+
+            fetchTasks();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const currentTasks: Task[] = tasks.filter(task => !task.completed)
+    const completedTasks: Task[] = tasks.filter(task => task.completed)
+
     return (
         <div>
             <Shell highlightedTab={"Tasks"}>
@@ -75,12 +93,35 @@ export default function TasksPage() {
                     </div>
                 </div>
 
-                {tasks.map(task => (
-                    <div key={task["id"]}>
-                        <input type={"checkbox"} className={"mr-2"} checked={task["completed"]}/>
-                        {task["content"]}
-                    </div>
-                ))}
+                <div className="my-4">
+                    <span className="text-xl text-blue-500">Current:</span>
+                    {currentTasks.map(task => (
+                        <div key={task["id"]}>
+                            <input
+                                type={"checkbox"}
+                                className={"mr-2"}
+                                checked={task["completed"]}
+                                onChange={() => handleCheckboxChange(task.id, task.completed)}
+                            />
+                            {task["content"]}
+                        </div>
+                    ))}
+                </div>
+
+                <div>
+                    <span className="text-xl text-yellow-500">Completed:</span>
+                    {completedTasks.map(task => (
+                        <div key={task["id"]}>
+                            <input
+                                type={"checkbox"}
+                                className={"mr-2"}
+                                checked={task["completed"]}
+                                onChange={() => handleCheckboxChange(task.id, task.completed)}
+                            />
+                            <span className="line-through text-gray-500">{task["content"]}</span>
+                        </div>
+                    ))}
+                </div>
             </Shell>
         </div>
     );

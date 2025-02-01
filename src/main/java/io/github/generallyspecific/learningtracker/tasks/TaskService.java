@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,14 @@ public class TaskService {
     public List<Task> getTasksWithLimit(int limit) {
         PageRequest pageRequest = PageRequest.of(0, limit, Sort.by("createdAt").descending());
         return taskRepository.findTopNBy(pageRequest);
+    }
+
+    public void updateTask(UUID id, boolean completed) {
+        Optional<Task> task = taskRepository.findById(id);
+        System.out.println(task.isPresent());
+        if (task.isPresent()) {
+            task.get().setCompleted(completed);
+            taskRepository.save(task.get());
+        }
     }
 }

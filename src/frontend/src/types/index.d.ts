@@ -41,7 +41,7 @@ export interface Video {
 // }
 
 export interface Task {
-    id: string;
+    id: number;
     content: string;
     completed: boolean;
 }
