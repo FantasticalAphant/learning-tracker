@@ -46,6 +46,13 @@ export interface Task {
     completed: boolean;
 }
 
+export interface Note {
+    id: number;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface S3File {
     filename: string;
     lastModified: Date;
