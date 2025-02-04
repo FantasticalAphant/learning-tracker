@@ -26,4 +26,8 @@ public class NoteService {
         note.setUpdatedAt(Instant.now());
         return noteRepository.save(note);
     }
+
+    public void deleteNote(UUID id) {
+        noteRepository.deleteById(id);
+    }
 }

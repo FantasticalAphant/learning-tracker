@@ -52,6 +52,19 @@ export default function NotesPage() {
         }
     }
 
+    const handleDelete = async (noteId: number) => {
+        const response = await fetch(`${API_URL}/notes/${noteId}`, {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+        })
+
+        if (!response.ok) {
+            throw Error("DELETE failed");
+        }
+
+        fetchNotes();
+    }
+
     const [text, setText] = useState(`# Welcome to the Markdown Editor
 
 This editor supports:
@@ -86,8 +99,9 @@ This editor supports:
                 {/*this might be relevant in the future:*/}
                 {/*https://stackoverflow.com/questions/62686893/new-line-n-does-not-work-in-mongodb-atlas*/}
                 {notes && notes.map((note) => (
-                    <div key={note.id}>
-                        {note.content}
+                    <div className="flex justify-between" key={note.id}>
+                        <span>{note.content}</span>
+                        <button onClick={() => handleDelete(note.id)}>X</button>
                     </div>
                 ))}
             </div>
