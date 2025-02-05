@@ -95,12 +95,14 @@ This editor supports:
                 </Markdown>
             </div>
 
-            <div>
+            <div className="mt-5">
                 {/*this might be relevant in the future:*/}
                 {/*https://stackoverflow.com/questions/62686893/new-line-n-does-not-work-in-mongodb-atlas*/}
                 {notes && notes.map((note) => (
-                    <div className="flex justify-between" key={note.id}>
-                        <span>{note.content}</span>
+                    <div className="flex justify-between border border-blue-500 rounded my-2 shadow p-2" key={note.id}>
+                        <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                            {note.content}
+                        </Markdown>
                         <button onClick={() => handleDelete(note.id)}>X</button>
                     </div>
                 ))}
