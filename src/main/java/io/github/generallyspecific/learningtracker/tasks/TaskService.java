@@ -41,4 +41,12 @@ public class TaskService {
             taskRepository.save(task.get());
         }
     }
+
+    public void deleteTask(UUID id) {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isPresent()) {
+            taskRepository.delete(task.get());
+        }
+    }
+
 }

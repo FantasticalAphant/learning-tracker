@@ -26,6 +26,12 @@ public class TaskController {
         return taskService.getTasks();
     }
 
+    @DeleteMapping("/tasks/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable UUID id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/tasks")
     public Task addTask(@RequestBody Task task) {
         return taskService.addTask(task);

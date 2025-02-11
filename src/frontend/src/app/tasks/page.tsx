@@ -52,9 +52,28 @@ export default function TasksPage() {
                 body: JSON.stringify({completed: !completed})
             });
 
+            // TODO: use optimistic updates for the checkbox
+
             fetchTasks();
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    const handleDelete = async (taskId: number) => {
+        try {
+            const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+            })
+
+            if (!response.ok) {
+                throw Error("DELETE failed");
+            }
+
+            fetchTasks();
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -96,14 +115,23 @@ export default function TasksPage() {
                 <div className="my-4">
                     <span className="text-xl text-blue-500">Current:</span>
                     {currentTasks.map(task => (
-                        <div key={task["id"]}>
-                            <input
-                                type={"checkbox"}
-                                className={"mr-2"}
-                                checked={task["completed"]}
-                                onChange={() => handleCheckboxChange(task.id, task.completed)}
-                            />
-                            {task["content"]}
+                        <div key={task["id"]} className="flex justify-between w-2/12">
+                            <div>
+                                <input
+                                    type={"checkbox"}
+                                    className={"mr-2"}
+                                    checked={task["completed"]}
+                                    onChange={() => handleCheckboxChange(task.id, task.completed)}
+                                />
+                                {task["content"]}
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() => handleDelete(task.id)}
+                                className="text-red-300">
+                                X
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -111,14 +139,23 @@ export default function TasksPage() {
                 <div>
                     <span className="text-xl text-yellow-500">Completed:</span>
                     {completedTasks.map(task => (
-                        <div key={task["id"]}>
-                            <input
-                                type={"checkbox"}
-                                className={"mr-2"}
-                                checked={task["completed"]}
-                                onChange={() => handleCheckboxChange(task.id, task.completed)}
-                            />
-                            <span className="line-through text-gray-500">{task["content"]}</span>
+                        <div key={task["id"]} className="flex justify-between w-2/12">
+                            <div>
+                                <input
+                                    type={"checkbox"}
+                                    className={"mr-2"}
+                                    checked={task["completed"]}
+                                    onChange={() => handleCheckboxChange(task.id, task.completed)}
+                                />
+                                <span className="line-through text-gray-500">{task["content"]}</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() => handleDelete(task.id)}
+                                className="text-red-300">
+                                X
+                            </button>
                         </div>
                     ))}
                 </div>
