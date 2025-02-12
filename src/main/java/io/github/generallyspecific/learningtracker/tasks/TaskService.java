@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class TaskService {
     public Task addTask(Task task) {
         task.setId(UUID.randomUUID());
         task.setCompleted(false);
+        task.setCreatedAt(Instant.now());
         return taskRepository.save(task);
     }
 
@@ -37,6 +39,9 @@ public class TaskService {
         Optional<Task> task = taskRepository.findById(id);
         System.out.println(task.isPresent());
         if (task.isPresent()) {
+            if (completed) {
+                task.get().setCompletedAt(Instant.now());
+            }
             task.get().setCompleted(completed);
             taskRepository.save(task.get());
         }

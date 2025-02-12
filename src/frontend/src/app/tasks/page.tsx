@@ -115,8 +115,8 @@ export default function TasksPage() {
                 <div className="my-4">
                     <span className="text-xl text-blue-500">Current:</span>
                     {currentTasks.map(task => (
-                        <div key={task["id"]} className="flex justify-between w-2/12">
-                            <div>
+                        <div key={task["id"]} className="flex">
+                            <div className="flex items-center">
                                 <input
                                     type={"checkbox"}
                                     className={"mr-2"}
@@ -124,12 +124,16 @@ export default function TasksPage() {
                                     onChange={() => handleCheckboxChange(task.id, task.completed)}
                                 />
                                 {task["content"]}
+                                <span
+                                    className="text-xs ml-3 justify-center bg-violet-100 rounded">
+                                    {new Date(task["createdAt"]).toLocaleString()}
+                                </span>
                             </div>
 
                             <button
                                 type="button"
                                 onClick={() => handleDelete(task.id)}
-                                className="text-red-300">
+                                className="text-red-300 ml-3">
                                 X
                             </button>
                         </div>
@@ -139,7 +143,7 @@ export default function TasksPage() {
                 <div>
                     <span className="text-xl text-yellow-500">Completed:</span>
                     {completedTasks.map(task => (
-                        <div key={task["id"]} className="flex justify-between w-2/12">
+                        <div key={task["id"]} className="flex">
                             <div>
                                 <input
                                     type={"checkbox"}
@@ -148,12 +152,16 @@ export default function TasksPage() {
                                     onChange={() => handleCheckboxChange(task.id, task.completed)}
                                 />
                                 <span className="line-through text-gray-500">{task["content"]}</span>
+                                <span
+                                    className="text-xs ml-3 justify-center bg-violet-100 rounded">
+                                    {new Date(task["createdAt"]).toLocaleString()}
+                                </span>
                             </div>
 
                             <button
                                 type="button"
                                 onClick={() => handleDelete(task.id)}
-                                className="text-red-300">
+                                className="text-red-300 ml-3">
                                 X
                             </button>
                         </div>
