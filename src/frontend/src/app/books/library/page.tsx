@@ -41,8 +41,8 @@ export default function BooksLibraryPage() {
 
     return (
         <Shell highlightedTab={"Books"}>
-            <div className="flex justify-between mb-5">
-                <h1>Library</h1>
+            <p className="text-4xl mb-2 text-center">Library</p>
+            <div className="mb-5">
                 <Link href={"/books"}>Search books</Link>
             </div>
             <BookLibrary books={books} handleDelete={deleteBook} handleUpdate={fetchBooks}/>
