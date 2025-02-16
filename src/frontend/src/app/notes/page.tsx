@@ -3,10 +3,11 @@
 import Shell from "@/components/Shell";
 import Markdown from 'react-markdown'
 import MarkdownEditor from "@/components/MarkdownEditor";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import remarkGfm from "remark-gfm";
 import {Note} from "@/types";
 import {API_URL} from "@/utils/api";
+import {ClipboardIcon} from "@heroicons/react/16/solid";
 
 export default function NotesPage() {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -99,11 +100,17 @@ This editor supports:
                 {/*this might be relevant in the future:*/}
                 {/*https://stackoverflow.com/questions/62686893/new-line-n-does-not-work-in-mongodb-atlas*/}
                 {notes && notes.map((note) => (
-                    <div className="flex justify-between border border-blue-500 rounded my-2 shadow p-2" key={note.id}>
+                    <div
+                        className="flex justify-between border border-blue-500 rounded my-2 shadow p-2" key={note.id}>
                         <Markdown remarkPlugins={[remarkGfm]} className="prose">
                             {note.content}
                         </Markdown>
-                        <button onClick={() => handleDelete(note.id)}>X</button>
+                        <div className="flex flex-row items-center gap-4">
+                            <button onClick={() => setText(note.content)}>
+                                <ClipboardIcon className="size-5"/>
+                            </button>
+                            <button className="size-5" onClick={() => handleDelete(note.id)}>X</button>
+                        </div>
                     </div>
                 ))}
             </div>
