@@ -8,6 +8,9 @@ import remarkGfm from "remark-gfm";
 import {Note} from "@/types";
 import {API_URL} from "@/utils/api";
 import {ClipboardIcon} from "@heroicons/react/16/solid";
+import 'katex/dist/katex.min.css'
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default function NotesPage() {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -91,7 +94,7 @@ This editor supports:
                 </button>
 
                 {/*Use remarkGfm plugin for extended markdown support*/}
-                <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]} className="prose">
                     {text}
                 </Markdown>
             </div>
@@ -102,7 +105,8 @@ This editor supports:
                 {notes && notes.map((note) => (
                     <div
                         className="flex justify-between border border-blue-500 rounded my-2 shadow p-2" key={note.id}>
-                        <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                        <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}
+                                  className="prose">
                             {note.content}
                         </Markdown>
                         <div className="flex flex-row items-center gap-4">
