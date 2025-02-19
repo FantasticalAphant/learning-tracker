@@ -86,7 +86,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
 
     const handleArticleClick = async (articleUrl) => {
         try {
-            await fetch(`${API_URL}/article/access?url=${encodeURIComponent(articleUrl)}`, {
+            fetch(`${API_URL}/article/access?url=${encodeURIComponent(articleUrl)}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                 {articles.map((article) => (
                                     <tr key={article["url"]}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            <a href="#" onClick={(e) => {
+                                            <a href={article["url"]} onClick={(e) => {
                                                 e.preventDefault(); // don't jump to top of the page
                                                 handleArticleClick(article["url"]);
                                             }}>
