@@ -105,7 +105,8 @@ export default function TasksPage() {
                         />
                         <button
                             type="submit" onClick={handleSubmit}
-                            className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            disabled={!taskContent}
+                            className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-blue-100 disabled:bg-gray-100"
                         >
                             Add
                         </button>
