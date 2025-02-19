@@ -15,6 +15,9 @@ import rehypeKatex from "rehype-katex";
 export default function NotesPage() {
     const [notes, setNotes] = useState<Note[]>([]);
 
+    const remarkPlugins = [remarkGfm, remarkMath]
+    const rehypePlugins = [rehypeKatex]
+
     const fetchNotes = async () => {
         try {
             const response = await fetch(`${API_URL}/notes`, {
@@ -94,7 +97,7 @@ This editor supports:
                 </button>
 
                 {/*Use remarkGfm plugin for extended markdown support*/}
-                <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]} className="prose">
+                <Markdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins} className="prose">
                     {text}
                 </Markdown>
             </div>
@@ -105,7 +108,7 @@ This editor supports:
                 {notes && notes.map((note) => (
                     <div
                         className="flex justify-between border border-blue-500 rounded my-2 shadow p-2" key={note.id}>
-                        <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}
+                        <Markdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins}
                                   className="prose">
                             {note.content}
                         </Markdown>
