@@ -40,7 +40,7 @@ export const TopicInput = ({onTopicsAdded}) => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div className="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                <div className="sm:grid sm:grid-cols-2 sm:items-start sm:gap-2 sm:py-6">
                     <label htmlFor="topic" className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
                         Topic Name:
                     </label>
