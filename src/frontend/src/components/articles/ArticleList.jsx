@@ -21,7 +21,7 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
         try {
             const [allTopicsResponse, currentTopicsResponse] = await Promise.all([
                 fetch(`${API_URL}/topics`),
-                fetch(`${API_URL}/topics?url=${encodeURIComponent(url)}`)]
+                fetch(`${API_URL}/article/topics?url=${encodeURIComponent(url)}`)]
             )
 
             const topics = await allTopicsResponse.json();
