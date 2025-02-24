@@ -11,10 +11,10 @@ export default function BooksLibraryPage() {
 
     const fetchBooks = async () => {
         try {
-            const response = await fetch(`${API_URL}/books`, {
+            const response = await fetch(`${API_URL}/books/names`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
-            });
+            })
 
             const data = await response.json();
             setBooks(data);

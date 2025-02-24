@@ -87,12 +87,12 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
                             <h3 className="mt-6 text-sm font-medium text-gray-900">{book["title"]}</h3>
                             <dl className="mt-1 flex flex-grow flex-col justify-between">
                                 <dt className="sr-only">Title</dt>
-                                <dd className="text-sm text-gray-500">{book["authors"].join(",")}</dd>
+                                <dd className="text-sm text-gray-500">{book["authors"].join(", ")}</dd>
                                 <dt className="sr-only">Role</dt>
-                                <dd className="mt-3">
+                                <dd className="mt-2">
                                     <button onClick={() => handleShow2(book["isbn"])}
                                             className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 mb-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                                        {book["topics"] || "No topics"}
+                                        {book["topics"].join(" | ") || "No topics"}
                                     </button>
                                 </dd>
                             </dl>
