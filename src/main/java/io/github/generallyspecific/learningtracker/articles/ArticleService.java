@@ -26,6 +26,7 @@ public class ArticleService {
 
     public Article addArticle(Article article) {
         String url = article.getUrl();
+        // Extract the title for the article using Jsoup
         try {
             Document document = org.jsoup.Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(3000).get();
 
@@ -44,7 +45,7 @@ public class ArticleService {
             article.setTitle(title);
         } catch (Exception e) {
             // JSoup call may fail due to Captcha checks
-            System.out.println("Error connecting to " + url);
+            System.err.println("Error connecting to " + url);
             article.setTitle(url);
         }
         article.setCreated(Instant.now());
@@ -68,7 +69,8 @@ public class ArticleService {
     }
 
     public List<UUID> getTopicsForArticle(String url) {
-        return articleRepository.findById(url).map(Article::getTopics).orElse(new ArrayList<>());
+        List<UUID> ids = articleRepository.findById(url).map(Article::getTopics).orElse(new ArrayList<>());
+        return ids;
     }
 
     public void updateLastAccessed(String url) {
