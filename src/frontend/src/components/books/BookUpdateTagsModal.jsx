@@ -1,7 +1,7 @@
 'use client'
 
 import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from '@headlessui/react'
-import {ExclamationTriangleIcon} from '@heroicons/react/24/outline'
+import {PencilIcon} from '@heroicons/react/24/outline'
 
 export default function BookUpdateTagsModal({
                                                 open,
@@ -27,9 +27,8 @@ export default function BookUpdateTagsModal({
                     >
                         <div className="sm:flex sm:items-start">
                             <div
-                                className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                {/*TODO: change this icon and color*/}
-                                <ExclamationTriangleIcon aria-hidden="true" className="h-6 w-6 text-red-600"/>
+                                className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <PencilIcon aria-hidden="true" className="h-6 w-6 text-green-600"/>
                             </div>
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                 <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
@@ -74,7 +73,7 @@ export default function BookUpdateTagsModal({
                                     updateTopics();
                                     setOpen(false);
                                 }}
-                                className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                             >
                                 Update
                             </button>

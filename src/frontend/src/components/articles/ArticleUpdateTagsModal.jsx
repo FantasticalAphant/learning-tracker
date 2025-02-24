@@ -1,9 +1,16 @@
 'use client'
 
 import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from '@headlessui/react'
-import {ExclamationTriangleIcon} from '@heroicons/react/24/outline'
+import {PencilIcon} from '@heroicons/react/24/outline'
 
-export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedTopics, handleCheckboxChange, updateTopics}) {
+export default function ArticleUpdateTagsModal({
+                                                   open,
+                                                   setOpen,
+                                                   topics,
+                                                   selectedTopics,
+                                                   handleCheckboxChange,
+                                                   updateTopics
+                                               }) {
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
             <DialogBackdrop
@@ -18,9 +25,9 @@ export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedT
                         className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
                     >
                         <div className="sm:flex sm:items-start">
-                            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                {/*TODO: change this icon and color*/}
-                                <ExclamationTriangleIcon aria-hidden="true" className="h-6 w-6 text-red-600" />
+                            <div
+                                className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <PencilIcon aria-hidden="true" className="h-6 w-6 text-green-600"/>
                             </div>
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                 <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
@@ -65,7 +72,7 @@ export default function ArticleUpdateTagsModal({open, setOpen, topics, selectedT
                                     updateTopics();
                                     setOpen(false);
                                 }}
-                                className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                             >
                                 Update
                             </button>
