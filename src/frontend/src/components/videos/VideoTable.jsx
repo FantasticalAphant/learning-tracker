@@ -98,7 +98,7 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
                             <tbody className="divide-y divide-gray-200">
                             {videos.map((video) => (
                                 <tr key={video["videoId"]}>
-                                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                    <td className="line-clamp-3 max-w-md py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                         <a href={`https://www.youtube.com/watch?v=${video["videoId"]}`}>
                                             {video["videoTitle"]}
                                         </a>
@@ -109,7 +109,7 @@ export default function VideoTable({videos, handleDelete, handleUpdate}) {
                                         </a>
                                     </td>
                                     {/*FIXME: update description*/}
-                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{video["videoDescription"].slice(0, 50)}...</td>
+                                    <td className="line-clamp-3 max-w-md px-3 py-4 text-sm text-gray-500">{video["videoDescription"].slice(0, 100)}...</td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{new Date(video["publishedAt"]).toLocaleString()}</td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <button onClick={() => handleShow2(video["videoId"])}
