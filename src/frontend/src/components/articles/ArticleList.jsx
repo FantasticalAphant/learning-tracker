@@ -116,15 +116,15 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                         Title
                                     </th>
                                     <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        className="py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Added On
                                     </th>
                                     <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        className="py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Last Accessed
                                     </th>
                                     <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        className="py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Website
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
@@ -143,13 +143,13 @@ export const ArticleList = ({articles, onArticleUpdated}) => {
                                                 {article["title"].slice(0, 60)}{article["title"].length > 60 && "..."}
                                             </a>
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                                             {new Date(article["created"]).toLocaleString()}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                                             {new Date(article["accessed"]).toLocaleString()}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Test</td>
+                                        <td className="whitespace-nowrap py-4 text-sm text-gray-500">Test</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <ArticleMenu
                                                 article={article}
