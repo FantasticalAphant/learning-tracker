@@ -2,6 +2,7 @@ package io.github.generallyspecific.learningtracker.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,10 @@ public class TopicService {
     }
 
     public List<Topic> getTopics(int limit) {
-        System.out.println(limit);
         if (limit > 0) {
-            return topicRepository.findBy(PageRequest.of(0, limit));
+            return topicRepository.findBy(PageRequest.of(0, limit, Sort.by(Sort.Direction.ASC, "name")));
         }
-        return topicRepository.findAll();
+        return topicRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public Topic addTopic(Topic topic) {
