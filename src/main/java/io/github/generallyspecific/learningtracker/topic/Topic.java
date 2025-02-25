@@ -3,6 +3,7 @@ package io.github.generallyspecific.learningtracker.topic;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,11 +14,15 @@ public class Topic {
     private UUID id;
     private String name;
     private String description;
+    private Instant createdAt;
+    private Instant updatedAt;
 
-    public Topic(UUID id, String name, String description) {
+    public Topic(UUID id, String name, String description, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public UUID getId() {
@@ -44,17 +49,32 @@ public class Topic {
         this.description = description;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Topic topic = (Topic) o;
-        return Objects.equals(id, topic.id) && Objects.equals(name, topic.name) && Objects.equals(description, topic.description);
+        return Objects.equals(id, topic.id) && Objects.equals(name, topic.name) && Objects.equals(description, topic.description) && Objects.equals(createdAt, topic.createdAt) && Objects.equals(updatedAt, topic.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description);
+        return Objects.hash(id, name, description, createdAt, updatedAt);
     }
 
     @Override
@@ -63,6 +83,8 @@ public class Topic {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
