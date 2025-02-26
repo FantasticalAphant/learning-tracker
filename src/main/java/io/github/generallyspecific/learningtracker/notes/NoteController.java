@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +21,17 @@ public class NoteController {
     @GetMapping("/notes")
     public List<Note> getNotes() {
         return noteService.getNotes();
+    }
+
+    @GetMapping("/notes/{noteId}")
+    public Note getNote(@PathVariable UUID noteId) {
+        return noteService.getNote(noteId);
+    }
+
+    @PutMapping("/notes/{noteId}")
+    public Note updateNote(@PathVariable UUID noteId, @RequestBody Map<String, String> payload) {
+        String content = payload.get("content"); // extract value from the JSON pair
+        return noteService.updateNote(noteId, content);
     }
 
     @PostMapping("/notes")

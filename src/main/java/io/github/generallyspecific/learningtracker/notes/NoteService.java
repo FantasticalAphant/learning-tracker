@@ -30,4 +30,15 @@ public class NoteService {
     public void deleteNote(UUID id) {
         noteRepository.deleteById(id);
     }
+
+    public Note getNote(UUID noteId) {
+        return noteRepository.findById(noteId).orElse(null);
+    }
+
+    public Note updateNote(UUID noteId, String content) {
+        Note note = getNote(noteId);
+        note.setContent(content);
+        note.setUpdatedAt(Instant.now());
+        return noteRepository.save(note);
+    }
 }
