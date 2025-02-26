@@ -11,8 +11,10 @@ import 'katex/dist/katex.min.css'
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 export default function NotesPage() {
+    const router = useRouter();
     const [notes, setNotes] = useState<Note[]>([]);
 
     const remarkPlugins = [remarkGfm, remarkMath]
@@ -54,19 +56,49 @@ export default function NotesPage() {
         fetchNotes();
     }
 
-    const [text, setText] = useState(`# Welcome to the Markdown Editor
+    const createNewNote = async () => {
+        // create a new note and redirect to that page
+        // use this as the default text for the new note
+        const text = `# Welcome to the Markdown Editor
 
 This editor supports:
 - Vim keybindings
 - Markdown syntax highlighting
 
-`);
+`;
+
+        try {
+            const response = await fetch(`${API_URL}/notes`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({content: text})
+            })
+
+            if (!response.ok) {
+                throw Error("POST failed");
+            }
+
+            const data = await response.json();
+
+            router.replace(`notes/${data.id}`)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     return (
         <Shell highlightedTab={"Notes"}>
             <p className="text-4xl text-center mb-10">Notes</p>
 
             {/*TODO: Allow user to add notes and then link them to topics*/}
+
+            <button
+                type="button"
+                onClick={createNewNote}
+                className="bg-orange-200 rounded-md p-1">
+                New Note
+            </button>
 
             <div className="mt-5">
                 {/*this might be relevant in the future:*/}
