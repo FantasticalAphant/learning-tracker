@@ -73,13 +73,13 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
 
     return (
         <>
-            <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {books.map((book, index) => (
                     <li
                         key={index}
                         className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow border border-gray-300"
                     >
-                        <div className="flex flex-1 flex-col p-8">
+                        <div className="flex flex-1 flex-col p-3">
                             <button className="w-5" onClick={() => handleShow1(book["isbn"])}>
                                 <XCircleIcon/>
                             </button>
