@@ -41,6 +41,7 @@ public class TopicService {
     }
 
     public void deleteTopic(String id) {
+        // FIXME: deleting the topic makes the topic null for books, videos, etc.
         topicRepository.deleteById(UUID.fromString(id));
     }
 }

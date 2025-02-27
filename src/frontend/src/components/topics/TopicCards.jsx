@@ -1,9 +1,18 @@
 import Link from "next/link";
 import {useTopics} from "@/contexts/TopicsContext";
 import {API_URL} from "@/utils/api";
+import TopicDeleteModal from "@/components/topics/TopicDeleteModal";
+import {useState} from "react";
 
 export const TopicCards = ({topics, onTopicsAdded}) => {
     const {refreshTopics} = useTopics();
+    const [showModal, setShowModal] = useState(false);
+    const [currentTopic, setCurrentTopic] = useState();
+
+    const handleShow = (topicId) => {
+        setCurrentTopic(topicId);
+        setShowModal(true);
+    }
 
     const handleDelete = async (topicId) => {
         try {
@@ -52,7 +61,12 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                     </div>
                                     <div className="-ml-px flex w-0 flex-1">
                                         <Link
-                                            href="#" onClick={() => handleDelete(topic["id"])}
+                                            // a button would probably be better for this case
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault(); // don't go to the top of the page
+                                                handleShow(topic["id"]);
+                                            }}
                                             className="relative inline-flex w-0 flex-1 items-center font-medium justify-center gap-x-3 rounded-br-lg border border-transparent py-2 text-sm text-gray-900 bg-red-200 hover:bg-red-400 hover:shadow"
                                         >
                                             Delete
@@ -64,6 +78,9 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                     </li>
                 ))}
             </ul>
+
+            <TopicDeleteModal open={showModal} setOpen={setShowModal} currentTopic={currentTopic}
+                              deleteTopic={handleDelete}/>
         </>
     )
 }
