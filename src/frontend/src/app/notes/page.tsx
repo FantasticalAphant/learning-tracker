@@ -6,7 +6,6 @@ import React, {useEffect, useState} from "react";
 import remarkGfm from "remark-gfm";
 import {Note} from "@/types";
 import {API_URL} from "@/utils/api";
-import {ClipboardIcon} from "@heroicons/react/16/solid";
 import 'katex/dist/katex.min.css'
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -112,15 +111,14 @@ This editor supports:
                                 {note.content}
                             </Markdown>
                             <div className="flex flex-row items-center gap-4">
-                                <button onClick={(e) => {
-                                    // prevent the button click from bubbling up
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setText(note.content)
-                                }}
-                                >
-                                    <ClipboardIcon className="size-5"/>
-                                </button>
+                                {/*<button onClick={(e) => {*/}
+                                {/*    // prevent the button click from bubbling up*/}
+                                {/*    e.preventDefault();*/}
+                                {/*    e.stopPropagation();*/}
+                                {/*}}*/}
+                                {/*>*/}
+                                {/*    <ClipboardIcon className="size-5"/>*/}
+                                {/*</button>*/}
                                 <button
                                     className="size-5"
                                     onClick={(e) => {
