@@ -3,15 +3,22 @@ import {useTopics} from "@/contexts/TopicsContext";
 import {API_URL} from "@/utils/api";
 import TopicDeleteModal from "@/components/topics/TopicDeleteModal";
 import {useState} from "react";
+import TopicUpdateModal from "@/components/topics/TopicUpdateModal";
 
 export const TopicCards = ({topics, onTopicsAdded}) => {
     const {refreshTopics} = useTopics();
-    const [showModal, setShowModal] = useState(false);
     const [currentTopic, setCurrentTopic] = useState();
+    const [showModal1, setShowModal1] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
 
-    const handleShow = (topicId) => {
+    const handleShow1 = (topicId) => {
         setCurrentTopic(topicId);
-        setShowModal(true);
+        setShowModal1(true);
+    }
+
+    const handleShow2 = (topicId) => {
+        setCurrentTopic(topicId);
+        setShowModal2(true);
     }
 
     const handleDelete = async (topicId) => {
@@ -30,6 +37,27 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
             await response.json();
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    const handleUpdate = async (topicId, name, description) => {
+        try {
+            const response = await fetch(`${API_URL}/topics/${topicId}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    name: name,
+                    description: description
+                }),
+            });
+
+            if (!response.ok) {
+                throw Error("PUT failed");
+            }
+
+            onTopicsAdded();
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -54,6 +82,10 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                     <div className="flex w-0 flex-1">
                                         <Link
                                             href={`#`}
+                                            onClick={(e) => {
+                                                e.preventDefault(); // don't go to the top of the page
+                                                handleShow2(topic);
+                                            }}
                                             className="relative -mr-px inline-flex w-0 flex-1 items-center font-medium justify-center gap-x-3 rounded-bl-lg border border-transparent py-2 text-sm text-gray-900 bg-blue-300 hover:bg-blue-400 hover:shadow"
                                         >
                                             Update
@@ -65,7 +97,7 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                                             href="#"
                                             onClick={(e) => {
                                                 e.preventDefault(); // don't go to the top of the page
-                                                handleShow(topic["id"]);
+                                                handleShow1(topic);
                                             }}
                                             className="relative inline-flex w-0 flex-1 items-center font-medium justify-center gap-x-3 rounded-br-lg border border-transparent py-2 text-sm text-gray-900 bg-red-200 hover:bg-red-400 hover:shadow"
                                         >
@@ -79,8 +111,11 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                 ))}
             </ul>
 
-            <TopicDeleteModal open={showModal} setOpen={setShowModal} currentTopic={currentTopic}
+            <TopicDeleteModal open={showModal1} setOpen={setShowModal1} currentTopic={currentTopic}
                               deleteTopic={handleDelete}/>
+
+            <TopicUpdateModal open={showModal2} setOpen={setShowModal2} currentTopic={currentTopic}
+                              updateTopic={handleUpdate}/>
         </>
     )
 }

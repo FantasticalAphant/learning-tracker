@@ -29,6 +29,15 @@ public class TopicService {
         return topicRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
+    public Topic updateTopic(String id, String name, String description) {
+        Topic topic = topicRepository.findById(UUID.fromString(id)).orElse(null);
+        topic.setName(name);
+        topic.setDescription(description);
+        topic.setUpdatedAt(Instant.now());
+
+        return topicRepository.save(topic);
+    }
+
     public Topic addTopic(Topic topic) {
         topic.setId(UUID.randomUUID());
         topic.setCreatedAt(Instant.now());
