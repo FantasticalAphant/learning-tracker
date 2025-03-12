@@ -3,6 +3,7 @@
 import Shell from "@/components/Shell";
 import Markdown from 'react-markdown'
 import React, {useEffect, useState} from "react";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import remarkGfm from "remark-gfm";
 import {Note} from "@/types";
 import {API_URL} from "@/utils/api";
@@ -106,10 +107,32 @@ This editor supports:
                     <Link href={`notes/${note.id}`} key={note.id}>
                         <div
                             className="flex justify-between border border-blue-500 rounded my-2 shadow p-2">
-                            <Markdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins}
-                                      className="prose">
+
+                            <Markdown
+                                remarkPlugins={remarkPlugins}
+                                rehypePlugins={rehypePlugins}
+                                className="prose"
+                                components={{
+                                    code(props) {
+                                        const {children, className, ...rest} = props
+                                        const match = /language-(\w+)/.exec(className || '')
+                                        return match ? (
+                                            <SyntaxHighlighter
+                                                language={match[1]}
+                                            >
+                                                {String(children).replace(/\n$/, '')}
+                                            </SyntaxHighlighter>
+                                        ) : (
+                                            <code {...rest} className={className}>
+                                                {children}
+                                            </code>
+                                        )
+                                    }
+                                }}
+                            >
                                 {note.content}
                             </Markdown>
+
                             <div className="flex flex-row items-center gap-4">
                                 {/*<button onClick={(e) => {*/}
                                 {/*    // prevent the button click from bubbling up*/}

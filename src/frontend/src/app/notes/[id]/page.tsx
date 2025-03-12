@@ -5,6 +5,7 @@ import MarkdownEditor from "@/components/MarkdownEditor";
 import Markdown from "react-markdown";
 import React, {useEffect, useState} from "react";
 import {API_URL} from "@/utils/api";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -87,6 +88,23 @@ export default function IndividualNotesPage({params}: Params) {
                     remarkPlugins={remarkPlugins}
                     rehypePlugins={rehypePlugins}
                     className="prose"
+                    components={{
+                        code(props) {
+                            const {children, className, ...rest} = props
+                            const match = /language-(\w+)/.exec(className || '')
+                            return match ? (
+                                <SyntaxHighlighter
+                                    language={match[1]}
+                                >
+                                    {String(children).replace(/\n$/, '')}
+                                </SyntaxHighlighter>
+                            ) : (
+                                <code {...rest} className={className}>
+                                    {children}
+                                </code>
+                            )
+                        }
+                    }}
                 >
                     {text}
                 </Markdown>
