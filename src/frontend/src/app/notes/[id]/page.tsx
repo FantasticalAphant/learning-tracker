@@ -82,9 +82,16 @@ export default function IndividualNotesPage({params}: Params) {
             </button>
 
             {/*Use remarkGfm plugin for extended markdown support*/}
-            <Markdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins} className="prose">
-                {text}
-            </Markdown>
+            <div className="w-1/2">
+                <Markdown
+                    remarkPlugins={remarkPlugins}
+                    rehypePlugins={rehypePlugins}
+                    className="prose"
+                >
+                    {text}
+                </Markdown>
+            </div>
+
         </div>
 
     </Shell>)
