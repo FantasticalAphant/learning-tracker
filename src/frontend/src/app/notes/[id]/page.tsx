@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import Link from "next/link";
+import NoteSaveNotification from "@/components/notes/NoteSaveNotification";
 
 interface Params {
     params: { id: string; };
@@ -17,6 +18,7 @@ interface Params {
 
 export default function IndividualNotesPage({params}: Params) {
     const [text, setText] = useState("");
+    const [show, setShow] = useState(false);
     const {id} = params;
 
     const remarkPlugins = [remarkGfm, remarkMath]
@@ -58,6 +60,7 @@ export default function IndividualNotesPage({params}: Params) {
                 throw Error("POST failed");
             }
 
+            setShow(true);
             fetchNote();
         } catch (err) {
             console.error(err);
@@ -111,6 +114,8 @@ export default function IndividualNotesPage({params}: Params) {
             </div>
 
         </div>
+
+        <NoteSaveNotification show={show} setShow={setShow}/>
 
     </Shell>)
 }
