@@ -127,26 +127,28 @@ export default function IndividualTopicPage({params}: Params) {
                 </div>
             </div>
 
-            {(activeTab.name === "Articles" || activeTab.name === "All") && articles && articles.map(article => (
-                <div key={article["url"]}>
-                    <p>{article["title"]}</p>
-                    <p>{new Date(article["created"]).toLocaleString()}</p>
-                </div>
-            ))}
+            <div className="my-5 space-y-1">
+                {(activeTab.name === "Articles" || activeTab.name === "All") && articles && articles.map(article => (
+                    <div key={article["url"]}>
+                        <p>Article Title: {article["title"]}</p>
+                        <p>Article Date: {new Date(article["created"]).toLocaleString()}</p>
+                    </div>
+                ))}
 
-            {(activeTab.name === "Books" || activeTab.name === "All") && books && books.map(book => (
-                <div key={book["isbn"]}>
-                    <p>{book["title"]}</p>
-                    <p>{book["authors"]}</p>
-                </div>
-            ))}
+                {(activeTab.name === "Books" || activeTab.name === "All") && books && books.map(book => (
+                    <div key={book["isbn"]}>
+                        <p>Book Title: {book["title"]}</p>
+                        <p>Book Author(s): {book["authors"].join(", ")}</p>
+                    </div>
+                ))}
 
-            {(activeTab.name === "Videos" || activeTab.name === "All") && videos && videos.map(video => (
-                <div key={video["videoId"]}>
-                    <p>{video["videoTitle"]}</p>
-                    <p>{video["videoDescription"].slice(0, 50)}...</p>
-                </div>
-            ))}
+                {(activeTab.name === "Videos" || activeTab.name === "All") && videos && videos.map(video => (
+                    <div key={video["videoId"]}>
+                        <p>Video Title: {video["videoTitle"]}</p>
+                        <p>Video Description: {video["videoDescription"].slice(0, 50)}...</p>
+                    </div>
+                ))}
+            </div>
 
         </Shell>
     )
