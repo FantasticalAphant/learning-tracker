@@ -43,7 +43,7 @@ export default function BooksLibraryPage() {
         <Shell highlightedTab={"Books"}>
             <p className="text-4xl mb-2 text-center">Library</p>
             <div className="mb-6">
-                <Link href={"/books"}>Search for books</Link>
+                <Link className="font-light" href={"/books"}>Search for books</Link>
             </div>
             <BookLibrary books={books} handleDelete={deleteBook} handleUpdate={fetchBooks}/>
         </Shell>

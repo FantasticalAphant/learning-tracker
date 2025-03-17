@@ -30,7 +30,7 @@ export default function BooksPage() {
         <Shell highlightedTab={"Books"}>
             <div>
                 <p className="text-4xl mb-2 text-center">Books</p>
-                <Link href="/books/library">
+                <Link className="font-light" href="/books/library">
                     Library
                 </Link>
             </div>
