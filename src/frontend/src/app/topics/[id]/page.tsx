@@ -129,7 +129,7 @@ export default function IndividualTopicPage({params}: Params) {
 
             <div className="my-5 space-y-1">
                 {(activeTab.name === "Articles" || activeTab.name === "All") && articles && articles.map(article => (
-                    <div key={article["url"]}>
+                    <div key={article["url"]} className="text-amber-600">
                         <p>{"Article Title: "}
                             <a href={article["url"]} className="underline">{article["title"]}</a>
                         </p>
@@ -138,14 +138,14 @@ export default function IndividualTopicPage({params}: Params) {
                 ))}
 
                 {(activeTab.name === "Books" || activeTab.name === "All") && books && books.map(book => (
-                    <div key={book["isbn"]}>
+                    <div key={book["isbn"]} className="text-blue-600">
                         <p>Book Title: {book["title"]}</p>
                         <p>Book Author(s): {book["authors"].join(", ")}</p>
                     </div>
                 ))}
 
                 {(activeTab.name === "Videos" || activeTab.name === "All") && videos && videos.map(video => (
-                    <div key={video["videoId"]}>
+                    <div key={video["videoId"]} className="text-violet-600">
                         <p>
                             {"Video Title: "}
                             <a href={`https://www.youtube.com/watch?v=${video["videoId"]}`} className="underline">
