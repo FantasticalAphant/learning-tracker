@@ -130,7 +130,9 @@ export default function IndividualTopicPage({params}: Params) {
             <div className="my-5 space-y-1">
                 {(activeTab.name === "Articles" || activeTab.name === "All") && articles && articles.map(article => (
                     <div key={article["url"]}>
-                        <p>Article Title: {article["title"]}</p>
+                        <p>{"Article Title: "}
+                            <a href={article["url"]} className="underline">{article["title"]}</a>
+                        </p>
                         <p>Article Date: {new Date(article["created"]).toLocaleString()}</p>
                     </div>
                 ))}
@@ -144,7 +146,12 @@ export default function IndividualTopicPage({params}: Params) {
 
                 {(activeTab.name === "Videos" || activeTab.name === "All") && videos && videos.map(video => (
                     <div key={video["videoId"]}>
-                        <p>Video Title: {video["videoTitle"]}</p>
+                        <p>
+                            {"Video Title: "}
+                            <a href={`https://www.youtube.com/watch?v=${video["videoId"]}`} className="underline">
+                                {video["videoTitle"]}
+                            </a>
+                        </p>
                         <p>Video Description: {video["videoDescription"].slice(0, 50)}...</p>
                     </div>
                 ))}
