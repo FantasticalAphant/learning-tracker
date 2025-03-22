@@ -31,12 +31,12 @@ export default function TopicUpdateModal({open, setOpen, currentTopic, updateTop
                                 className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
                                 <PencilIcon aria-hidden="true" className="h-6 w-6 text-green-600"/>
                             </div>
-                            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                                 <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
                                     Update Topic
                                 </DialogTitle>
-                                <div>
-                                    <div>
+                                <div className="w-full">
+                                    <div className="w-full">
                                         <label htmlFor="name"
                                                className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
                                             Name:
@@ -47,25 +47,23 @@ export default function TopicUpdateModal({open, setOpen, currentTopic, updateTop
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
 
-                                    <div className="mt-2">
+                                    <div className="mt-2 w-full">
                                         <label htmlFor="description"
                                                className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
                                             Description:
                                         </label>
-                                        <div className="mt-2 sm:col-span-2 sm:mt-0">
-                                            <textarea
-                                                id="description"
-                                                name="description"
-                                                rows={3}
-                                                value={description}
-                                                onChange={(e) => setDescription(e.target.value)}
-                                                className="block w-full max-w-2xl rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 resize-none"
-                                            />
-                                        </div>
+                                        <textarea
+                                            id="description"
+                                            name="description"
+                                            rows={3}
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 resize-none"
+                                        />
                                     </div>
                                 </div>
                             </div>
