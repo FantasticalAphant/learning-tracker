@@ -139,7 +139,11 @@ export default function IndividualTopicPage({params}: Params) {
 
                 {(activeTab.name === "Books" || activeTab.name === "All") && books && books.map(book => (
                     <div key={book["isbn"]} className="text-blue-600">
-                        <p>Book Title: {book["title"]}</p>
+                        {"Book Title: "}
+                        <a href={`https://www.goodreads.com/search?q=${book["isbn"]}`} className="underline">
+                            {book["title"]}
+                        </a>
+
                         <p>Book Author(s): {book["authors"].join(", ")}</p>
                     </div>
                 ))}

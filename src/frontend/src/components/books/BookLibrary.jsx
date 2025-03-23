@@ -3,7 +3,6 @@ import {useCallback, useState} from "react";
 import BookUpdateTagsModal from "@/components/books/BookUpdateTagsModal";
 import BookDeleteModal from "@/components/books/BookDeleteModal";
 import {API_URL} from "@/utils/api";
-import Link from "next/link";
 
 export default function BookLibrary({books, handleDelete, handleUpdate}) {
     const [topics, setTopics] = useState([]);
@@ -85,11 +84,11 @@ export default function BookLibrary({books, handleDelete, handleUpdate}) {
                                 <XCircleIcon/>
                             </button>
                             <img alt="" src={book["thumbnail"]} className="mx-auto h-32 w-32 flex-shrink-0"/>
-                            <Link href={`https://www.goodreads.com/search?q=${book["isbn"]}`}>
+                            <a href={`https://www.goodreads.com/search?q=${book["isbn"]}`}>
                                 <h3 className="mt-6 text-sm font-medium text-gray-900">
                                     {book["title"]}
                                 </h3>
-                            </Link>
+                            </a>
                             <dl className="mt-1 flex flex-grow flex-col justify-between">
                                 <dt className="sr-only">Title</dt>
                                 <dd className="text-sm text-gray-500">{book["authors"].join(", ")}</dd>
