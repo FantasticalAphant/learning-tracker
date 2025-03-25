@@ -30,6 +30,7 @@ import {MagnifyingGlassIcon} from '@heroicons/react/20/solid'
 import {TvIcon} from "@heroicons/react/24/outline/index";
 import Link from "next/link";
 import {useTopics} from "@/contexts/TopicsContext";
+import NotificationDrawer from "@/components/NotificationDrawer";
 
 const navigationTabs = [
     {name: 'Topics', href: '/topics', icon: FolderIcon, current: false},
@@ -49,6 +50,7 @@ export default function Shell({children, highlightedTab}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [navigation, setNavigation] = useState(navigationTabs)
     const {topics} = useTopics()
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setNavigation((prevNav) =>
@@ -292,7 +294,11 @@ export default function Shell({children, highlightedTab}) {
                                 />
                             </form>
                             <div className="flex items-center gap-x-4 lg:gap-x-6">
-                                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                                <button
+                                    type="button"
+                                    onClick={() => setOpen(!open)}
+                                    className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
+                                >
                                     <span className="sr-only">View notifications</span>
                                     <BellIcon aria-hidden="true" className="h-6 w-6"/>
                                 </button>
@@ -305,6 +311,8 @@ export default function Shell({children, highlightedTab}) {
                     </main>
                 </div>
             </div>
+
+            <NotificationDrawer open={open} setOpen={setOpen}/>
         </>
     )
 }
