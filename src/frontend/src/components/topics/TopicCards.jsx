@@ -80,29 +80,26 @@ export const TopicCards = ({topics, onTopicsAdded}) => {
                             <div>
                                 <div className="-mt-px flex divide-x divide-gray-200">
                                     <div className="flex w-0 flex-1">
-                                        <Link
-                                            href={`#`}
+                                        <button
                                             onClick={(e) => {
-                                                e.preventDefault(); // don't go to the top of the page
+                                                e.preventDefault(); // don't go to topics page
                                                 handleShow2(topic);
                                             }}
                                             className="relative -mr-px inline-flex w-0 flex-1 items-center font-medium justify-center gap-x-3 rounded-bl-lg border border-transparent py-2 text-sm text-gray-900 bg-blue-300 hover:bg-blue-400 hover:shadow"
                                         >
                                             Update
-                                        </Link>
+                                        </button>
                                     </div>
                                     <div className="-ml-px flex w-0 flex-1">
-                                        <Link
-                                            // a button would probably be better for this case
-                                            href="#"
+                                        <button
                                             onClick={(e) => {
-                                                e.preventDefault(); // don't go to the top of the page
+                                                e.preventDefault(); // don't go to topics page
                                                 handleShow1(topic);
                                             }}
                                             className="relative inline-flex w-0 flex-1 items-center font-medium justify-center gap-x-3 rounded-br-lg border border-transparent py-2 text-sm text-gray-900 bg-red-200 hover:bg-red-400 hover:shadow"
                                         >
                                             Delete
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
