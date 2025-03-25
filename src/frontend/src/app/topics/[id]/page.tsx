@@ -1,13 +1,13 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import { useEffect, useState, use } from "react";
 import Shell from "@/components/Shell";
 import {Article, Book, Topic, Video} from "@/types";
 import Link from "next/link";
 import {API_URL} from "@/utils/api";
 
 interface Params {
-    params: { id: string; };
+    params: Promise<{ id: string; }>;
 }
 
 const tabs = [
@@ -21,7 +21,8 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function IndividualTopicPage({params}: Params) {
+export default function IndividualTopicPage(props: Params) {
+    const params = use(props.params);
     const {id} = params;
     const [topic, setTopic] = useState<Topic | null>(null);
     const [articles, setArticles] = useState<Article[]>([]);
