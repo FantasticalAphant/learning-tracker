@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, use } from "react";
+import {use, useEffect, useState} from "react";
 import Shell from "@/components/Shell";
 import {Article, Book, Topic, Video} from "@/types";
 import Link from "next/link";
@@ -108,9 +108,8 @@ export default function IndividualTopicPage(props: Params) {
                     <div className="hidden sm:block">
                         <nav className="-mb-px flex space-x-8">
                             {tabs.map((tab) => (
-                                <a
+                                <button
                                     key={tab.name}
-                                    href={"javascript:;"}
                                     onClick={() => setActiveTab(tab)}
                                     aria-current={tab.current ? 'page' : undefined}
                                     className={classNames(
@@ -121,7 +120,7 @@ export default function IndividualTopicPage(props: Params) {
                                     )}
                                 >
                                     {tab.name}
-                                </a>
+                                </button>
                             ))}
                         </nav>
                     </div>
